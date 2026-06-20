@@ -65,7 +65,7 @@ export function ProgramFilters({
 }: ProgramFiltersProps) {
   return (
     <div
-      className="superr"
+      className="superr program-filters"
       style={{
         position: "sticky",
         top: 64,
@@ -75,6 +75,7 @@ export function ProgramFilters({
       }}
     >
       <div
+        className="program-filters-inner"
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -85,7 +86,7 @@ export function ProgramFilters({
         }}
       >
         {/* Search */}
-        <div style={{ position: "relative", flex: "0 1 260px" }}>
+        <div className="program-filters-search" style={{ position: "relative", flex: "0 1 260px" }}>
           <Search
             size={14}
             style={{

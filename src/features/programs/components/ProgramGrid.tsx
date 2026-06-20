@@ -1,3 +1,5 @@
+"use client";
+import { motion, easeOut } from "framer-motion";
 import type { Program } from "../types/program.types";
 import { ProgramCard } from "./ProgramCard";
 import { EmptyPrograms } from "./EmptyPrograms";
@@ -9,6 +11,16 @@ interface ProgramGridProps {
   onResetFilters: () => void;
   isLoading: boolean;
 }
+
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.05 } },
+};
+
+const cardItem = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
+};
 
 function SkeletonCard() {
   return (
@@ -125,7 +137,13 @@ export function ProgramGrid({
   return (
     <section className="superr" style={{ padding: "0 24px 64px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ marginBottom: 28, position: "relative" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease: easeOut }}
+          style={{ marginBottom: 28, position: "relative" }}
+        >
           <h2
             className="display-headline"
             style={{
@@ -147,8 +165,12 @@ export function ProgramGrid({
           >
             showing {programs.length} program{programs.length !== 1 ? "s" : ""}
           </p>
-        </div>
-        <div
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={container}
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
@@ -156,14 +178,15 @@ export function ProgramGrid({
           }}
         >
           {programs.map((program) => (
-            <ProgramCard
-              key={program.id}
-              program={program}
-              onViewDetails={onViewDetails}
-              onApplyNow={onApplyNow}
-            />
+            <motion.div key={program.id} variants={cardItem}>
+              <ProgramCard
+                program={program}
+                onViewDetails={onViewDetails}
+                onApplyNow={onApplyNow}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

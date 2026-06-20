@@ -1,9 +1,21 @@
+"use client";
+import { motion, easeOut } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 
 interface HeroSectionProps {
   onBrowsePrograms: () => void;
   onContactAdmissions: () => void;
 }
+
+const stickerFloat = {
+  hidden: { opacity: 0, scale: 0.6, rotate: 0 },
+  visible: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    rotate: i === 0 ? 12 : -8,
+    transition: { type: "spring" as const, stiffness: 200, damping: 14, delay: 0.4 + i * 0.15 },
+  }),
+};
 
 export function HeroSection({ onBrowsePrograms, onContactAdmissions }: HeroSectionProps) {
   return (
@@ -17,8 +29,12 @@ export function HeroSection({ onBrowsePrograms, onContactAdmissions }: HeroSecti
       }}
     >
       {/* Sticker decorations */}
-      <div
+      <motion.div
         className="sticker"
+        custom={0}
+        variants={stickerFloat}
+        initial="hidden"
+        animate="visible"
         style={{
           position: "absolute",
           top: 30,
@@ -45,9 +61,13 @@ export function HeroSection({ onBrowsePrograms, onContactAdmissions }: HeroSecti
             strokeLinejoin="round"
           />
         </svg>
-      </div>
-      <div
+      </motion.div>
+      <motion.div
         className="sticker"
+        custom={1}
+        variants={stickerFloat}
+        initial="hidden"
+        animate="visible"
         style={{
           position: "absolute",
           bottom: 40,
@@ -63,7 +83,7 @@ export function HeroSection({ onBrowsePrograms, onContactAdmissions }: HeroSecti
             strokeWidth="2"
           />
         </svg>
-      </div>
+      </motion.div>
 
       <div
         style={{
@@ -73,7 +93,10 @@ export function HeroSection({ onBrowsePrograms, onContactAdmissions }: HeroSecti
           position: "relative",
         }}
       >
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -100,10 +123,13 @@ export function HeroSection({ onBrowsePrograms, onContactAdmissions }: HeroSecti
             <GraduationCap size={14} />
             academic year 2025-26 admissions open
           </div>
-        </div>
+        </motion.div>
 
-        <h1
+        <motion.h1
           className="display-headline"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15, ease: easeOut }}
           style={{
             fontSize: "clamp(2.5rem, 6vw, 5rem)",
             margin: "0 auto 16px",
@@ -113,9 +139,12 @@ export function HeroSection({ onBrowsePrograms, onContactAdmissions }: HeroSecti
           explore our
           <br />
           <span style={{ color: "var(--color-marker-orange)" }}>programs</span>
-        </h1>
+        </motion.h1>
 
-        <p
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3, ease: easeOut }}
           style={{
             fontFamily: "var(--font-geist)",
             fontSize: 18,
@@ -127,9 +156,12 @@ export function HeroSection({ onBrowsePrograms, onContactAdmissions }: HeroSecti
         >
           choose from school, diploma, undergraduate, and professional programs
           designed to help you achieve your academic and career goals.
-        </p>
+        </motion.p>
 
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.45, ease: easeOut }}
           style={{
             display: "flex",
             alignItems: "center",
@@ -148,7 +180,7 @@ export function HeroSection({ onBrowsePrograms, onContactAdmissions }: HeroSecti
           >
             contact admissions
           </button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

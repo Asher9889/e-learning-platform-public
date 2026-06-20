@@ -1,9 +1,7 @@
 "use client";
 import { useState, useCallback } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { sileo } from "sileo";
-// import { Header } from "#components/home/Header";
-// import { Footer } from "#components/home/Footer";
 import { usePrograms } from "../hooks/usePrograms";
 import { HeroSection } from "../components/HeroSection";
 import { ProgramFilters } from "../components/ProgramFilters";
@@ -13,11 +11,11 @@ import { ProgramGrid } from "../components/ProgramGrid";
 import { ProgramFAQ } from "../components/ProgramFAQ";
 import { CTASection } from "../components/CTASection";
 import { ApplyNowModal } from "../components/ApplyNowModal";
+import { FooterSection } from "../components/FooterSection";
 import type { Program } from "../types/program.types";
-// import "@/pages/Home/superr.css";
 
 export default function ProgramsPage() {
-  // const navigate = useNavigate();
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("All Programs");
   const [durationFilter, setDurationFilter] = useState("All");
@@ -39,13 +37,12 @@ export default function ProgramsPage() {
     setSortBy("Newest");
   }, []);
 
-  const handleViewDetails = () => {};
-  // const handleViewDetails = useCallback(
-  //   (slug: string) => {
-  //     navigate(`/programs/${slug}`);
-  //   },
-  //   [navigate]
-  // );
+  const handleViewDetails = useCallback(
+    (slug: string) => {
+      router.push(`/programs/${slug}`);
+    },
+    [router]
+  );
 
   const handleApplyNow = useCallback((program: Program) => {
     setSelectedProgram(program);
@@ -63,16 +60,11 @@ export default function ProgramsPage() {
     });
   }, []);
 
-  const scrollTo = useCallback((id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  }, []);
-
   return (
     <div
       className="superr"
       style={{ minHeight: "100vh", overflowX: "hidden" }}
     >
-      {/* <Header /> */}
       <HeroSection
         onBrowsePrograms={handleBrowsePrograms}
         onContactAdmissions={handleContactAdmissions}
@@ -110,7 +102,7 @@ export default function ProgramsPage() {
         }}
         onContactAdmissions={handleContactAdmissions}
       />
-      {/* <Footer scrollTo={scrollTo} /> */}
+      <FooterSection />
       <ApplyNowModal
         program={selectedProgram}
         open={modalOpen}

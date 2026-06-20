@@ -245,59 +245,56 @@ export function ApplyNowModal({ program, open, onOpenChange }: ApplyNowModalProp
         </div>
 
         {/* Benefits */}
-        <div
-          style={{
-            border: "1.5px solid var(--color-charcoal)",
-            borderRadius: "var(--radius-cards)",
-            padding: 20,
-            marginBottom: 24,
-          }}
-        >
-          <h4
+        {program.benefits && program.benefits.length > 0 && (
+          <div
             style={{
-              fontFamily: "var(--font-gelica)",
-              fontSize: 16,
-              color: "var(--color-cocoa-ink)",
-              marginBottom: 12,
-              textTransform: "lowercase",
+              border: "1.5px solid var(--color-charcoal)",
+              borderRadius: "var(--radius-cards)",
+              padding: 20,
+              marginBottom: 24,
             }}
           >
-            benefits
-          </h4>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {[
-              "industry-recognized certification",
-              "expert faculty with real-world experience",
-              "flexible learning schedules",
-              "dedicated placement assistance",
-            ].map((benefit) => (
-              <div
-                key={benefit}
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: 8,
-                  fontFamily: "var(--font-geist)",
-                  fontSize: 13,
-                  color: "var(--color-charcoal)",
-                  opacity: 0.7,
-                  textTransform: "lowercase",
-                }}
-              >
-                <CheckCircle2
-                  size={14}
-                  className="marker-highlight"
+            <h4
+              style={{
+                fontFamily: "var(--font-gelica)",
+                fontSize: 16,
+                color: "var(--color-cocoa-ink)",
+                marginBottom: 12,
+                textTransform: "lowercase",
+              }}
+            >
+              benefits
+            </h4>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {program.benefits.map((benefit) => (
+                <div
+                  key={benefit}
                   style={{
-                    color: "var(--color-marker-orange)",
-                    marginTop: 2,
-                    flexShrink: 0,
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 8,
+                    fontFamily: "var(--font-geist)",
+                    fontSize: 13,
+                    color: "var(--color-charcoal)",
+                    opacity: 0.7,
+                    textTransform: "lowercase",
                   }}
-                />
-                {benefit}
-              </div>
-            ))}
+                >
+                  <CheckCircle2
+                    size={14}
+                    className="marker-highlight"
+                    style={{
+                      color: "var(--color-marker-orange)",
+                      marginTop: 2,
+                      flexShrink: 0,
+                    }}
+                  />
+                  {benefit}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Action */}
         <button

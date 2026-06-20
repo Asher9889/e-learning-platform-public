@@ -10,4 +10,5 @@ export interface Program {
   eligibility: string;
   fee: string;
   featured: boolean;
+  benefits?: string[];
 }

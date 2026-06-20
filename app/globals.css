@@ -232,6 +232,17 @@ body {
   stroke-linecap: round;
 }
 
+/* ── Program Filters ── */
+.superr .program-filters-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.superr .program-filters-search {
+  flex: 0 1 260px;
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .superr .display-headline {
@@ -239,6 +250,26 @@ body {
   }
   .superr .product-card {
     padding: 20px;
+  }
+
+  .superr .program-filters-inner {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .superr .program-filters-search {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .superr .program-filters-inner select {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none !important;
+  }
+
+  .superr .program-filters-inner .pill-btn {
+    flex: 0 0 38px;
   }
 }
 

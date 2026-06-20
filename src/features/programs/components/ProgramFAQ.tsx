@@ -1,3 +1,5 @@
+"use client";
+import { motion, easeOut } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
@@ -29,6 +31,16 @@ const faqs = [
   },
 ];
 
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.07 } },
+};
+
+const faqItem = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: easeOut } },
+};
+
 export function ProgramFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -42,7 +54,13 @@ export function ProgramFAQ() {
     >
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
         {/* Section Header */}
-        <div style={{ marginBottom: 36, textAlign: "center" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease: easeOut }}
+          style={{ marginBottom: 36, textAlign: "center" }}
+        >
           <h2
             className="display-headline"
             style={{
@@ -64,15 +82,22 @@ export function ProgramFAQ() {
           >
             everything you need to know about our programs and admission process.
           </p>
-        </div>
+        </motion.div>
 
         {/* Accordion */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={container}
+          style={{ display: "flex", flexDirection: "column", gap: 8 }}
+        >
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div
+              <motion.div
                 key={index}
+                variants={faqItem}
                 className="product-card"
                 style={{
                   padding: 0,
@@ -110,12 +135,14 @@ export function ProgramFAQ() {
                     }}
                   />
                 </div>
-                <div
-                  style={{
-                    maxHeight: isOpen ? 300 : 0,
-                    overflow: "hidden",
-                    transition: "max-height 0.3s ease",
+                <motion.div
+                  initial={false}
+                  animate={{
+                    height: isOpen ? "auto" : 0,
+                    opacity: isOpen ? 1 : 0,
                   }}
+                  transition={{ duration: 0.3, ease: easeOut }}
+                  style={{ overflow: "hidden" }}
                 >
                   <div
                     style={{
@@ -130,11 +157,11 @@ export function ProgramFAQ() {
                   >
                     {faq.answer}
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

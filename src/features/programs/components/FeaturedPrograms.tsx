@@ -1,4 +1,6 @@
-import { Star, ArrowRight } from "lucide-react";
+"use client";
+import { motion, easeOut } from "framer-motion";
+import { Star, GraduationCap, ArrowRight } from "lucide-react";
 import type { Program } from "../types/program.types";
 
 interface FeaturedProgramsProps {
@@ -15,6 +17,24 @@ const categoryColors: Record<string, string> = {
   Professional: "#e11d48",
 };
 
+const categoryGradients: Record<string, string> = {
+  School: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
+  Diploma: "linear-gradient(135deg, #22c55e 0%, #15803d 100%)",
+  Undergraduate: "linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)",
+  Postgraduate: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+  Professional: "linear-gradient(135deg, #e11d48 0%, #be123c 100%)",
+};
+
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+
+const cardItem = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
+};
+
 export function FeaturedPrograms({
   programs,
   onViewDetails,
@@ -26,7 +46,13 @@ export function FeaturedPrograms({
     <section className="superr" style={{ padding: "0 24px 64px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Section Header */}
-        <div style={{ marginBottom: 32, position: "relative" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease: easeOut }}
+          style={{ marginBottom: 32, position: "relative" }}
+        >
           <div
             style={{
               display: "flex",
@@ -63,19 +89,24 @@ export function FeaturedPrograms({
           >
             most popular programs among students.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={container}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
             gap: 16,
           }}
         >
           {programs.slice(0, 4).map((program) => (
-            <div
+            <motion.div
               key={program.id}
+              variants={cardItem}
               className="product-card"
               style={{
                 padding: 24,
@@ -107,6 +138,22 @@ export function FeaturedPrograms({
                 }}
               >
                 {program.category}
+              </div>
+
+              {/* Thumbnail */}
+              <div
+                style={{
+                  aspectRatio: "16/9",
+                  borderRadius: "var(--radius-cards)",
+                  overflow: "hidden",
+                  background: categoryGradients[program.category],
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: 14,
+                }}
+              >
+                <GraduationCap size={32} style={{ color: "#fff", opacity: 0.3 }} />
               </div>
 
               <h3
@@ -209,9 +256,9 @@ export function FeaturedPrograms({
                   <ArrowRight size={12} />
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

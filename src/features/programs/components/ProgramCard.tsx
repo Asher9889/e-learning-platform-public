@@ -1,4 +1,5 @@
-import { Clock, GraduationCap, IndianRupee, ArrowRight, ImageIcon } from "lucide-react";
+import Image from "next/image";
+import { Clock, GraduationCap, IndianRupee, ArrowRight } from "lucide-react";
 import type { Program } from "../types/program.types";
 
 interface ProgramCardProps {
@@ -7,12 +8,12 @@ interface ProgramCardProps {
   onApplyNow: (program: Program) => void;
 }
 
-const categoryColors: Record<string, string> = {
-  School: "#3b82f6",
-  Diploma: "#22c55e",
-  Undergraduate: "#a855f7",
-  Postgraduate: "#f97316",
-  Professional: "#e11d48",
+const categoryGradients: Record<string, string> = {
+  School: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
+  Diploma: "linear-gradient(135deg, #22c55e 0%, #15803d 100%)",
+  Undergraduate: "linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)",
+  Postgraduate: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+  Professional: "linear-gradient(135deg, #e11d48 0%, #be123c 100%)",
 };
 
 const modeLabels: Record<string, string> = {
@@ -29,7 +30,6 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
         padding: 0,
         overflow: "hidden",
         transition: "transform 0.25s ease, box-shadow 0.25s ease",
-        cursor: "default",
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "translateY(-4px)";
@@ -45,7 +45,7 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
         style={{
           aspectRatio: "16/9",
           overflow: "hidden",
-          background: "var(--color-dew-drop)",
+          background: categoryGradients[program.category],
           position: "relative",
           display: "flex",
           alignItems: "center",
@@ -53,33 +53,27 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
         }}
       >
         {program.thumbnail ? (
-          <img
+          <Image
             src={program.thumbnail}
             alt={program.name}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
+            fill
+            style={{ objectFit: "cover" }}
           />
         ) : (
-          <div style={{ textAlign: "center" }}>
-            <ImageIcon
-              size={32}
-              style={{ color: "var(--color-charcoal)", opacity: 0.2 }}
-            />
-            <p
+          <div style={{ textAlign: "center", color: "#fff", opacity: 0.3 }}>
+            <GraduationCap size={40} style={{ margin: "0 auto 8px" }} />
+            <span
               style={{
                 fontFamily: "var(--font-geist)",
-                fontSize: 11,
-                color: "var(--color-charcoal)",
-                opacity: 0.3,
-                marginTop: 4,
+                fontSize: 12,
+                fontWeight: 500,
                 textTransform: "lowercase",
+                letterSpacing: "0.05em",
+                color: "#fff",
               }}
             >
-              {program.category}
-            </p>
+              {program.name}
+            </span>
           </div>
         )}
         {/* Category badge */}
@@ -96,7 +90,8 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
             fontSize: 11,
             fontWeight: 500,
             color: "#fff",
-            background: categoryColors[program.category] || "#666",
+            background: "rgba(0,0,0,0.3)",
+            backdropFilter: "blur(4px)",
             textTransform: "lowercase",
           }}
         >

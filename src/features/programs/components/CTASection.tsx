@@ -1,3 +1,5 @@
+"use client";
+import { motion, easeOut } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 interface CTASectionProps {
@@ -8,7 +10,13 @@ interface CTASectionProps {
 export function CTASection({ onApplyNow, onContactAdmissions }: CTASectionProps) {
   return (
     <section className="superr" style={{ padding: "0 24px 80px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.6, ease: easeOut }}
+        style={{ maxWidth: 1200, margin: "0 auto" }}
+      >
         <div
           className="product-card"
           style={{
@@ -20,61 +28,40 @@ export function CTASection({ onApplyNow, onContactAdmissions }: CTASectionProps)
           }}
         >
           {/* Sticker decorations */}
-          <div
+          <motion.div
             className="sticker"
+            initial={{ opacity: 0, scale: 0, rotate: -8 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: -8 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring" as const, stiffness: 200, damping: 14, delay: 0.3 }}
             style={{
               position: "absolute",
               top: 20,
               left: 20,
-              transform: "rotate(-8deg)",
             }}
           >
             <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-              <circle
-                cx="18"
-                cy="18"
-                r="16"
-                fill="#3b82f6"
-                stroke="#171717"
-                strokeWidth="2"
-              />
-              <path
-                d="M12 18L16 22L24 14"
-                stroke="#171717"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <circle cx="18" cy="18" r="16" fill="#3b82f6" stroke="#171717" strokeWidth="2" />
+              <path d="M12 18L16 22L24 14" stroke="#171717" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             className="sticker"
+            initial={{ opacity: 0, scale: 0, rotate: 12 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 12 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring" as const, stiffness: 200, damping: 14, delay: 0.45 }}
             style={{
               position: "absolute",
               bottom: 20,
               right: 20,
-              transform: "rotate(12deg)",
             }}
           >
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <rect
-                x="2"
-                y="2"
-                width="28"
-                height="28"
-                rx="6"
-                fill="#ff66cf"
-                stroke="#171717"
-                strokeWidth="2"
-              />
-              <path
-                d="M16 8V24M8 16H24"
-                stroke="#171717"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              />
+              <rect x="2" y="2" width="28" height="28" rx="6" fill="#ff66cf" stroke="#171717" strokeWidth="2" />
+              <path d="M16 8V24M8 16H24" stroke="#171717" strokeWidth="2.5" strokeLinecap="round" />
             </svg>
-          </div>
+          </motion.div>
 
           <h2
             className="display-headline"
@@ -133,7 +120,7 @@ export function CTASection({ onApplyNow, onContactAdmissions }: CTASectionProps)
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

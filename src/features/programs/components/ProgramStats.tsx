@@ -1,3 +1,5 @@
+"use client";
+import { motion, easeOut } from "framer-motion";
 import { BookOpen, Users, Award, HeadphonesIcon } from "lucide-react";
 
 const stats = [
@@ -27,13 +29,29 @@ const stats = [
   },
 ];
 
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
+};
+
+const countUp = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: { opacity: 1, scale: 1, transition: { type: "spring" as const, stiffness: 120, damping: 12, delay: 0.2 } },
+};
+
 export function ProgramStats() {
   return (
-    <section
-      className="superr"
-      style={{ padding: "0 24px 64px" }}
-    >
-      <div
+    <section className="superr" style={{ padding: "0 24px 64px" }}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-40px" }}
+        variants={container}
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -44,8 +62,12 @@ export function ProgramStats() {
         }}
       >
         {/* Sticker */}
-        <div
+        <motion.div
           className="sticker"
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring" as const, stiffness: 200, damping: 14, delay: 0.3 }}
           style={{
             position: "absolute",
             top: -20,
@@ -54,89 +76,84 @@ export function ProgramStats() {
           }}
         >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <circle
-              cx="14"
-              cy="14"
-              r="12"
-              fill="#22c55e"
-              stroke="#171717"
-              strokeWidth="2"
-            />
+            <circle cx="14" cy="14" r="12" fill="#22c55e" stroke="#171717" strokeWidth="2" />
           </svg>
-        </div>
+        </motion.div>
 
         {stats.map((s) => (
-          <div
-            key={s.label}
-            className="product-card"
-            style={{
-              padding: 28,
-              textAlign: "center",
-              transition: "transform 0.25s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-3px)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "";
-            }}
-          >
+          <motion.div key={s.label} variants={item}>
             <div
+              className="product-card"
               style={{
-                width: 44,
-                height: 44,
-                borderRadius: 12,
-                border: "1.5px solid var(--color-charcoal)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: "0 auto 14px",
+                padding: 28,
+                textAlign: "center",
+                transition: "transform 0.25s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-3px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "";
               }}
             >
-              <s.icon
-                size={20}
-                style={{ color: "var(--color-marker-orange)" }}
-              />
+              <div
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: 12,
+                  border: "1.5px solid var(--color-charcoal)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "0 auto 14px",
+                }}
+              >
+                <s.icon size={20} style={{ color: "var(--color-marker-orange)" }} />
+              </div>
+              <motion.div
+                variants={countUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                style={{
+                  fontFamily: "var(--font-gelica)",
+                  fontSize: 32,
+                  fontWeight: 400,
+                  color: "var(--color-cocoa-ink)",
+                  lineHeight: 1.08,
+                  marginBottom: 4,
+                  textTransform: "lowercase",
+                }}
+              >
+                {s.value}
+              </motion.div>
+              <div
+                style={{
+                  fontFamily: "var(--font-geist)",
+                  fontSize: 14,
+                  fontWeight: 500,
+                  color: "var(--color-charcoal)",
+                  textTransform: "lowercase",
+                  marginBottom: 2,
+                }}
+              >
+                {s.label}
+              </div>
+              <div
+                style={{
+                  fontFamily: "var(--font-geist)",
+                  fontSize: 12,
+                  color: "var(--color-charcoal)",
+                  opacity: 0.6,
+                  textTransform: "lowercase",
+                }}
+              >
+                {s.desc}
+              </div>
             </div>
-            <div
-              style={{
-                fontFamily: "var(--font-gelica)",
-                fontSize: 32,
-                fontWeight: 400,
-                color: "var(--color-cocoa-ink)",
-                lineHeight: 1.08,
-                marginBottom: 4,
-                textTransform: "lowercase",
-              }}
-            >
-              {s.value}
-            </div>
-            <div
-              style={{
-                fontFamily: "var(--font-geist)",
-                fontSize: 14,
-                fontWeight: 500,
-                color: "var(--color-charcoal)",
-                textTransform: "lowercase",
-                marginBottom: 2,
-              }}
-            >
-              {s.label}
-            </div>
-            <div
-              style={{
-                fontFamily: "var(--font-geist)",
-                fontSize: 12,
-                color: "var(--color-charcoal)",
-                opacity: 0.6,
-                textTransform: "lowercase",
-              }}
-            >
-              {s.desc}
-            </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

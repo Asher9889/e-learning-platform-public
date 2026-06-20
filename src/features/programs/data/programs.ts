@@ -14,6 +14,12 @@ export const programs: Program[] = [
     eligibility: "Class 9 Pass",
     fee: "₹25,000",
     featured: true,
+    benefits: [
+      "expert faculty with personalized mentoring",
+      "comprehensive science, commerce & arts streams",
+      "regular progress tracking & parent updates",
+      "scholarship opportunities for meritorious students",
+    ],
   },
   {
     id: "2",
@@ -28,6 +34,12 @@ export const programs: Program[] = [
     eligibility: "Class 10 Pass",
     fee: "₹30,000",
     featured: false,
+    benefits: [
+      "specialized stream selection with career counseling",
+      "hybrid learning with recorded lecture access",
+      "regular mock tests & performance analytics",
+      "dedicated academic mentor for each student",
+    ],
   },
   {
     id: "3",
@@ -42,6 +54,12 @@ export const programs: Program[] = [
     eligibility: "Class 11 Pass",
     fee: "₹35,000",
     featured: true,
+    benefits: [
+      "board exam-focused intensive preparation",
+      "weekly mock tests with detailed feedback",
+      "personalized doubt-clearing sessions",
+      "past paper analysis & exam strategy workshops",
+    ],
   },
   {
     id: "4",
@@ -56,6 +74,12 @@ export const programs: Program[] = [
     eligibility: "12th Pass with PCM",
     fee: "₹1,50,000 / Semester",
     featured: true,
+    benefits: [
+      "industry-aligned curriculum with latest tech stacks",
+      "hands-on projects & hackathons every semester",
+      "internship opportunities with partner companies",
+      "placement assistance with top tech recruiters",
+    ],
   },
   {
     id: "5",
@@ -70,6 +94,12 @@ export const programs: Program[] = [
     eligibility: "12th Pass with PCM",
     fee: "₹1,20,000 / Semester",
     featured: false,
+    benefits: [
+      "state-of-the-art electronics & communication labs",
+      "industry partnerships for live projects",
+      "research-oriented learning with faculty guidance",
+      "campus placement with leading tech firms",
+    ],
   },
   {
     id: "6",
@@ -84,6 +114,12 @@ export const programs: Program[] = [
     eligibility: "12th Pass",
     fee: "₹60,000 / Semester",
     featured: true,
+    benefits: [
+      "industry-oriented curriculum with live projects",
+      "certifications in cloud, cybersecurity & web dev",
+      "hybrid model with weekend batch options",
+      "100% internship assistance program",
+    ],
   },
   {
     id: "7",
@@ -98,6 +134,12 @@ export const programs: Program[] = [
     eligibility: "Graduate (BCA/B.Sc. CS)",
     fee: "₹75,000 / Semester",
     featured: true,
+    benefits: [
+      "advanced curriculum in AI, cloud & enterprise dev",
+      "capstone project with industry mentorship",
+      "access to research publications & conferences",
+      "dedicated placement cell with 500+ hiring partners",
+    ],
   },
   {
     id: "8",
@@ -112,6 +154,12 @@ export const programs: Program[] = [
     eligibility: "Graduate in any discipline",
     fee: "₹1,00,000 / Semester",
     featured: true,
+    benefits: [
+      "specializations across finance, marketing, HR & ops",
+      "live industry projects with top companies",
+      "executive networking events & guest lectures",
+      "campus placement with fortune 500 companies",
+    ],
   },
   {
     id: "9",
@@ -126,6 +174,12 @@ export const programs: Program[] = [
     eligibility: "Graduate with basic programming knowledge",
     fee: "₹45,000",
     featured: true,
+    benefits: [
+      "hands-on training with real-world datasets",
+      "python, ML, deep learning & big data coverage",
+      "certification with industry recognition",
+      "job placement assistance with data firms",
+    ],
   },
   {
     id: "10",
@@ -140,6 +194,12 @@ export const programs: Program[] = [
     eligibility: "Basic programming knowledge",
     fee: "₹40,000",
     featured: false,
+    benefits: [
+      "modern stack — react, node, typescript, aws",
+      "build 5+ real-world projects for portfolio",
+      "devops & ci/cd pipeline training included",
+      "interview preparation & resume building",
+    ],
   },
   {
     id: "11",
@@ -154,6 +214,12 @@ export const programs: Program[] = [
     eligibility: "12th Pass",
     fee: "₹25,000",
     featured: false,
+    benefits: [
+      "comprehensive seo, sem & social media training",
+      "google & meta certification preparation",
+      "live campaign management experience",
+      "portfolio building with real client projects",
+    ],
   },
   {
     id: "12",
@@ -168,5 +234,11 @@ export const programs: Program[] = [
     eligibility: "12th Pass, basic design interest",
     fee: "₹35,000",
     featured: false,
+    benefits: [
+      "master figma, adobe xd & prototyping tools",
+      "user research & usability testing training",
+      "build a professional design portfolio",
+      "design critique sessions with industry experts",
+    ],
   },
 ];
