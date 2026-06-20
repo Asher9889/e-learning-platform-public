@@ -1,3 +1,4 @@
+"use client";
 import { useState, useCallback } from "react";
 // import { useNavigate } from "react-router-dom";
 import { sileo } from "sileo";
@@ -13,7 +14,7 @@ import { ProgramFAQ } from "../components/ProgramFAQ";
 import { CTASection } from "../components/CTASection";
 import { ApplyNowModal } from "../components/ApplyNowModal";
 import type { Program } from "../types/program.types";
-import "@/pages/Home/superr.css";
+// import "@/pages/Home/superr.css";
 
 export default function ProgramsPage() {
   // const navigate = useNavigate();
