@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/src/components/layout/Header";
+import { Providers } from "@/src/providers";
+import Script from "next/script";
+
+import ReduxProvider from "@/src/redux/provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,8 +33,14 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        
         <Header />
+       <ReduxProvider>
+        <Providers>
         {children}
+        </Providers>
+        </ReduxProvider>
+        <Script  src="https://checkout.razorpay.com/v1/checkout.js" />
       </body>
     </html>
   );

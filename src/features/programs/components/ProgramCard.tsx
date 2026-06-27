@@ -9,11 +9,11 @@ interface ProgramCardProps {
 }
 
 const categoryGradients: Record<string, string> = {
-  School: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
-  Diploma: "linear-gradient(135deg, #22c55e 0%, #15803d 100%)",
-  Undergraduate: "linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)",
-  Postgraduate: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-  Professional: "linear-gradient(135deg, #e11d48 0%, #be123c 100%)",
+  SCHOOL: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
+  DIPLOMA: "linear-gradient(135deg, #22c55e 0%, #15803d 100%)",
+  UNDERGRADUATE: "linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)",
+  POSTGRADUATE: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+  PROFESSIONAL: "linear-gradient(135deg, #e11d48 0%, #be123c 100%)",
 };
 
 const modeLabels: Record<string, string> = {
@@ -23,6 +23,8 @@ const modeLabels: Record<string, string> = {
 };
 
 export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardProps) {
+
+  console.log(program,"ProgramCard")
   return (
     <div
       className="product-card"
@@ -45,16 +47,17 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
         style={{
           aspectRatio: "16/9",
           overflow: "hidden",
-          background: categoryGradients[program.category],
+          background: categoryGradients[program.programType],
           position: "relative",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
+        
         {program.thumbnail ? (
           <Image
-            src={program.thumbnail}
+            src={`https://storage.mssplonline.in/e-learning/${program?.thumbnail}`}
             alt={program.name}
             fill
             style={{ objectFit: "cover" }}
@@ -95,7 +98,7 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
             textTransform: "lowercase",
           }}
         >
-          {program.category}
+          {program.programType}
         </div>
       </div>
 
@@ -122,15 +125,21 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
         <p
           style={{
             fontFamily: "var(--font-geist)",
-            fontSize: 13,
-            lineHeight: 1.5,
-            color: "var(--color-charcoal)",
-            marginBottom: 18,
-            opacity: 0.7,
-            display: "-webkit-box",
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
+                  fontSize: 12,
+                  lineHeight: 1.5,
+                  color: "var(--color-charcoal)",
+                  marginBottom: 14,
+                  opacity: 0.7,
+
+                  whiteSpace: "pre-line", // \n ko newline me convert karega
+
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+
+                  wordBreak: "break-word",
+                  overflowWrap: "break-word",
           }}
         >
           {program.description}
@@ -157,7 +166,7 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
             }}
           >
             <Clock size={14} style={{ opacity: 0.5 }} />
-            {program.duration}
+            {program.durationMonths + " months"}
           </div>
           <div
             style={{
@@ -172,7 +181,7 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
           >
             {modeLabels[program.mode] || program.mode}
           </div>
-          <div
+          {/* <div
             style={{
               display: "flex",
               alignItems: "center",
@@ -186,7 +195,7 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
           >
             <GraduationCap size={14} style={{ opacity: 0.5 }} />
             {program.eligibility}
-          </div>
+          </div> */}
         </div>
 
         {/* Fee */}
@@ -210,7 +219,7 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
               textTransform: "lowercase",
             }}
           >
-            {program.fee}
+            {program.feeAmount + " / " + program.feeType}
           </span>
         </div>
 

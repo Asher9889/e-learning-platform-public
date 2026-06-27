@@ -1,15 +1,21 @@
 import { useMemo } from "react";
-import { programs } from "../data/programs";
+import { usePrograms } from "./use-programs";
+import { Program } from "../types/program.types";
+// import { programs } from "../data/programs";
 
 interface UseProgramsFilters {
   searchQuery: string;
-  categoryFilter: string;
-  durationFilter: string;
-  sortBy: string;
+  categoryFilter?: string;
+  durationFilter?: string;
+  sortBy?: string;
 }
 
-export function usePrograms(filters: UseProgramsFilters) {
+export function useProgramsData(filters: UseProgramsFilters) {
+ const { data: programs, isLoading } = usePrograms();
+console.log(programs,"programs132132")
   const filtered = useMemo(() => {
+if(!programs) return [];  
+
     let result = [...programs];
 
     if (filters.searchQuery.trim()) {
@@ -57,19 +63,18 @@ export function usePrograms(filters: UseProgramsFilters) {
     }
 
     return result;
-  }, [filters]);
+  }, [filters, programs]);
 
   const featured = useMemo(
-    () => programs.filter((p) => p.featured),
-    []
+    () => programs?.filter((p:Program) => p.featured),
+    [programs]
   );
 
-  const isLoading = false;
 
   return {
     programs: filtered,
     featured,
     isLoading,
-    totalCount: programs.length,
+    totalCount: programs?.length,
   };
 }

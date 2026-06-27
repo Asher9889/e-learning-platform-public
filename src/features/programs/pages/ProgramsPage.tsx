@@ -2,7 +2,7 @@
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { sileo } from "sileo";
-import { usePrograms } from "../hooks/usePrograms";
+import {  useProgramsData } from "../hooks/usePrograms";
 import { HeroSection } from "../components/HeroSection";
 import { ProgramFilters } from "../components/ProgramFilters";
 import { ProgramStats } from "../components/ProgramStats";
@@ -22,14 +22,14 @@ export default function ProgramsPage() {
   const [sortBy, setSortBy] = useState("Newest");
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-
-  const { programs, featured, isLoading } = usePrograms({
+  const { programs, featured, isLoading } = useProgramsData({
     searchQuery,
     categoryFilter,
     durationFilter,
     sortBy,
   });
 
+  console.log(programs,"programsprogramsprogramsprogramsprograms")
   const resetFilters = useCallback(() => {
     setSearchQuery("");
     setCategoryFilter("All Programs");
@@ -82,13 +82,13 @@ export default function ProgramsPage() {
         onReset={resetFilters}
       />
       <FeaturedPrograms
-        programs={featured}
+        programs={featured || []}
         onViewDetails={handleViewDetails}
         onApplyNow={handleApplyNow}
       />
       <div id="programs-grid">
         <ProgramGrid
-          programs={programs}
+          programs={programs || []}
           onViewDetails={handleViewDetails}
           onApplyNow={handleApplyNow}
           onResetFilters={resetFilters}

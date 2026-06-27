@@ -133,7 +133,7 @@ export function ProgramGrid({
   if (programs.length === 0) {
     return <EmptyPrograms onResetFilters={onResetFilters} />;
   }
-
+console.log(programs,"asjhdgjasgdjagdjhgaw")
   return (
     <section className="superr" style={{ padding: "0 24px 64px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>

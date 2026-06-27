@@ -2,6 +2,7 @@
 import { motion, easeOut } from "framer-motion";
 import { Star, GraduationCap, ArrowRight } from "lucide-react";
 import type { Program } from "../types/program.types";
+import Image from "next/image";
 
 interface FeaturedProgramsProps {
   programs: Program[];
@@ -18,11 +19,11 @@ const categoryColors: Record<string, string> = {
 };
 
 const categoryGradients: Record<string, string> = {
-  School: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
-  Diploma: "linear-gradient(135deg, #22c55e 0%, #15803d 100%)",
-  Undergraduate: "linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)",
-  Postgraduate: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-  Professional: "linear-gradient(135deg, #e11d48 0%, #be123c 100%)",
+  SCHOOL: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
+  DIPLOMA: "linear-gradient(135deg, #22c55e 0%, #15803d 100%)",
+  UNDERGRADUATE: "linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)",
+  POSTGRADUATE: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+  PROFESSIONAL: "linear-gradient(135deg, #e11d48 0%, #be123c 100%)",
 };
 
 const container = {
@@ -132,12 +133,12 @@ export function FeaturedPrograms({
                   fontSize: 11,
                   fontWeight: 500,
                   color: "#fff",
-                  background: categoryColors[program.category] || "#666",
+                  background: categoryColors[program.programType] || "#666",
                   textTransform: "lowercase",
                   marginBottom: 12,
                 }}
               >
-                {program.category}
+                {program.programType}
               </div>
 
               {/* Thumbnail */}
@@ -146,14 +147,38 @@ export function FeaturedPrograms({
                   aspectRatio: "16/9",
                   borderRadius: "var(--radius-cards)",
                   overflow: "hidden",
-                  background: categoryGradients[program.category],
+                  background: categoryGradients[program.programType],
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   marginBottom: 14,
                 }}
               >
-                <GraduationCap size={32} style={{ color: "#fff", opacity: 0.3 }} />
+                {/* <GraduationCap size={32} style={{ color: "#fff", opacity: 0.3 }} /> */}
+                {program.thumbnail ? (
+                          <Image
+                            src={`https://storage.mssplonline.in/e-learning/${program?.thumbnail}`}
+                            alt={program.name}
+                            fill
+                            style={{ objectFit: "cover" }}
+                          />
+                        ) : (
+                          <div style={{ textAlign: "center", color: "#fff", opacity: 0.3 }}>
+                            <GraduationCap size={40} style={{ margin: "0 auto 8px" }} />
+                            <span
+                              style={{
+                                fontFamily: "var(--font-geist)",
+                                fontSize: 12,
+                                fontWeight: 500,
+                                textTransform: "lowercase",
+                                letterSpacing: "0.05em",
+                                color: "#fff",
+                              }}
+                            >
+                              {program.name}
+                            </span>
+                          </div>
+                        )}
               </div>
 
               <h3
@@ -181,11 +206,17 @@ export function FeaturedPrograms({
                   lineHeight: 1.5,
                   color: "var(--color-charcoal)",
                   marginBottom: 14,
+                  opacity: 0.7,
+
+                  whiteSpace: "pre-line", // \n ko newline me convert karega
+
                   display: "-webkit-box",
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: "vertical",
                   overflow: "hidden",
-                  opacity: 0.7,
+
+                  wordBreak: "break-word",
+                  overflowWrap: "break-word",
                 }}
               >
                 {program.description}
@@ -207,7 +238,7 @@ export function FeaturedPrograms({
                     textTransform: "lowercase",
                   }}
                 >
-                  {program.fee}
+                  {program.feeAmount + " / " + program.feeType}
                 </span>
                 <span
                   style={{
@@ -218,7 +249,7 @@ export function FeaturedPrograms({
                     textTransform: "lowercase",
                   }}
                 >
-                  {program.duration}
+                  {Number(program.durationMonths) / 12 + " years"}
                 </span>
               </div>
 

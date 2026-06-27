@@ -1,7 +1,11 @@
+"use client";
 import { useEffect, useRef } from "react";
 import { CheckCircle2, Clock, GraduationCap, IndianRupee, X } from "lucide-react";
 import { sileo } from "sileo";
 import type { Program } from "../types/program.types";
+import { useRouter } from "next/navigation";
+import { setProgram } from "@/src/redux/slice/selectProgramSlice";
+import { useDispatch } from "react-redux";
 
 interface ApplyNowModalProps {
   program: Program | null;
@@ -11,7 +15,8 @@ interface ApplyNowModalProps {
 
 export function ApplyNowModal({ program, open, onOpenChange }: ApplyNowModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
-
+  const dispatch = useDispatch();
+  const router = useRouter();
   useEffect(() => {
     if (!open) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -32,7 +37,10 @@ export function ApplyNowModal({ program, open, onOpenChange }: ApplyNowModalProp
   if (!program) return null;
 
   const handleStartAdmission = () => {
+
     onOpenChange(false);
+    dispatch(setProgram(program));
+    router.push(`/admissions/${program.slug}`)
     sileo.success({
       title: "Admission flow will be integrated soon.",
     });
@@ -157,7 +165,7 @@ export function ApplyNowModal({ program, open, onOpenChange }: ApplyNowModalProp
                   textTransform: "lowercase",
                 }}
               >
-                {program.fee}
+                {program.feeAmount}
               </p>
             </div>
           </div>
@@ -184,7 +192,7 @@ export function ApplyNowModal({ program, open, onOpenChange }: ApplyNowModalProp
                   textTransform: "lowercase",
                 }}
               >
-                {program.duration}
+                {program.durationMonths}
               </p>
             </div>
           </div>

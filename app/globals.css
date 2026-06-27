@@ -6,6 +6,7 @@
   :root {
     --background: #fefefe;
     --foreground: #ededed;
+    --primary: #455dc7;  
   }
 }
 
@@ -20,6 +21,9 @@ body {
      Cream page, orange marker, sticker labels waiting to be peeled.
   ==================================================================== */
 
+@theme {
+  --color-primary: #3b82f6;
+}
 /* ── Fonts ── */
 
 /* ── Custom Properties ── */

@@ -2,13 +2,14 @@ export interface Program {
   id: string;
   name: string;
   slug: string;
-  category: "School" | "Diploma" | "Undergraduate" | "Postgraduate" | "Professional";
+  programType: "SCHOOL" | "DIPLOMA" | "UNDERGRADUATE" | "POSTGRADUATE" | "PROFESSIONAL";
   thumbnail: string;
   description: string;
-  duration: string;
+  durationMonths: string;
   mode: "Online" | "Offline" | "Hybrid";
   eligibility: string;
-  fee: string;
+  feeAmount: string;
   featured: boolean;
   benefits?: string[];
+  feeType?: string;
 }
