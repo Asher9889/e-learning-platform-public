@@ -31,11 +31,11 @@ const emptyFormData: AdmissionFormData = {
         gender: "MALE",
         dob: "",
         address: {
-  line1: "",
-  city: "",
-  state: "",
-  zipCode: "",
-}
+            line1: "",
+            city: "",
+            state: "",
+            zipCode: "",
+        }
     },
     academics: [],
     documents: {
@@ -59,12 +59,10 @@ export function AdmissionPage({ slug }: Props) {
     const [formData, setFormData] = useState<AdmissionFormData>(emptyFormData);
     const [paymentId, setPaymentId] = useState<string | null>(null);
     const { createAdmissionAsync, isCreating, createError } = useCreateAdmission();
-  
+
     const goTo = (s: number) => setStep(s);
     const back = () => setStep((s) => Math.max(1, s - 1));
-    const selectedProgram = useAppSelector(
-        (state) => state.program.program
-    );
+    const selectedProgram = useAppSelector((state) => state.program.program);
     // Only completed steps and the current step are reachable by click —
     // jumping ahead into an unfilled step would show an empty/broken form.
     const handleStepClick = (target: number) => {
@@ -85,12 +83,9 @@ export function AdmissionPage({ slug }: Props) {
             programId: selectedProgram?.id,
         };
 
-        
+
 
         return await createAdmissionAsync(updatedData);
-        // if(res){
-
-        // }
     };
 
     return (
@@ -157,8 +152,8 @@ export function AdmissionPage({ slug }: Props) {
                             setPaymentId(id);
 
                             console.log(formData, "formDataformDataformData");
-                            const res:any = await handleSubmit(formData);
-                            console.log(res,"response")
+                            const res: any = await handleSubmit(formData);
+                            console.log(res, "response")
                             if (!res) {
                                 throw new Error("Admission creation failed");
                             }
