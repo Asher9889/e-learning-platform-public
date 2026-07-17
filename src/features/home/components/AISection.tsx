@@ -58,67 +58,34 @@ const cardItem = {
 
 export function AISection() {
   return (
-    <section
-      className="section"
-      style={{
-        background: "var(--inverse-surface)",
-        color: "var(--inverse-on-surface)",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
+    <section className="bg-inverse-surface text-inverse-on-surface relative overflow-hidden px-8 py-12">
       {/* Glow accent */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          width: "33%",
-          height: "100%",
-          opacity: 0.1,
-          pointerEvents: "none",
-        }}
-      >
+      <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
         <svg
-          style={{ width: "100%", height: "100%" }}
+          className="w-full h-full"
           preserveAspectRatio="none"
           viewBox="0 0 100 100"
         >
-          <circle cx="100" cy="50" r="50" fill="var(--primary)" opacity="0.3" />
+          <circle cx="100" cy="50" r="50" fill="var(--color-primary)" opacity="0.3" />
         </svg>
       </div>
 
-      <div className="container" style={{ position: "relative", zIndex: 1 }}>
-        <div
-          className="flex flex--between flex--wrap"
-          style={{
-            marginBottom: "var(--spacing-margin-lg)",
-            alignItems: "flex-end",
-            gap: 24,
-          }}
-        >
-          <div style={{ maxWidth: 560 }}>
-            <div
-              className="flex"
-              style={{ alignItems: "center", gap: 8, marginBottom: 16 }}
-            >
-              <Sparkles size={20} style={{ color: "var(--tertiary-fixed)" }} />
-              <span
-                className="text-label-md"
-                style={{
-                  color: "var(--tertiary-fixed)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                }}
-              >
+      <div className="container mx-auto relative z-10 max-w-[var(--container-max)]">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+          <div className="max-w-xl">
+            <div className="flex items-center gap-2 mb-4">
+              <Sparkles size={20} className="text-tertiary-fixed" />
+              <span className="text-sm font-semibold font-display text-tertiary-fixed uppercase tracking-widest">
                 Next-Gen Intelligence
               </span>
             </div>
-            <h2 className="text-headline-lg" style={{ color: "#ffffff" }}>
+            <h2 className="text-3xl font-bold font-display text-white">
               AI Built Into Every Classroom
             </h2>
           </div>
-          <button className="btn btn--primary">View AI Roadmap</button>
+          <button className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-primary text-on-primary rounded-xl font-semibold text-sm font-display cursor-pointer border-none hover:bg-on-primary-container hover:shadow-md transition-all duration-fast">
+            View AI Roadmap
+          </button>
         </div>
 
         <motion.div
@@ -126,56 +93,21 @@ export function AISection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
           variants={container}
-          className="grid"
-          style={{
-            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-            gap: "var(--spacing-gutter)",
-          }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {aiFeatures.map((feat) => (
             <motion.div
               key={feat.title}
               variants={cardItem}
-              style={{
-                padding: 32,
-                borderRadius: 24,
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                backdropFilter: "blur(8px)",
-                transition: "background var(--duration-fast) var(--ease-out)",
-                cursor: "default",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-              }}
+              className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-lg cursor-default transition-colors duration-fast hover:bg-white/10"
             >
-              <div
-                style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: "var(--radius-md)",
-                  background: "var(--tertiary-fixed)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: 24,
-                }}
-              >
-                <feat.icon size={24} style={{ color: "var(--on-tertiary-fixed)" }} />
+              <div className="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center mb-6">
+                <feat.icon size={24} className="text-on-tertiary-fixed" />
               </div>
-              <h3
-                className="text-headline-sm"
-                style={{ color: "#ffffff", marginBottom: 8 }}
-              >
+              <h3 className="text-xl font-semibold font-display text-white mb-2">
                 {feat.title}
               </h3>
-              <p
-                className="text-body-sm"
-                style={{ color: "rgba(255,255,255,0.7)" }}
-              >
+              <p className="text-sm text-white/70">
                 {feat.desc}
               </p>
             </motion.div>

@@ -1,4 +1,3 @@
-import { TopNavBar } from "../components/TopNavBar";
 import { HeroSection } from "../components/HeroSection";
 import { TrustBar } from "../components/TrustBar";
 import { EducationChange } from "../components/EducationChange";
@@ -12,8 +11,7 @@ import { Footer } from "../components/Footer";
 
 export default function HomePage() {
   return (
-    <div style={{ minHeight: "100vh", overflowX: "hidden" }}>
-      <TopNavBar />
+    <div className="min-h-screen overflow-x-hidden">
       <main>
         <HeroSection />
         <TrustBar />

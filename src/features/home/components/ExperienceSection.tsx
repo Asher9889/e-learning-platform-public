@@ -10,14 +10,16 @@ const roles = [
       "User Access Control",
       "Finance & Fee Tracking",
     ],
-    accent: "var(--primary-fixed)",
-    iconColor: "var(--primary)",
+    accent: "bg-primary-fixed",
+    iconColor: "text-primary",
+    letterColor: "text-primary",
   },
   {
     title: "Teacher",
     features: ["Lesson Planner", "Auto-Attendance", "Gradebook Automation"],
-    accent: "var(--tertiary-fixed)",
-    iconColor: "var(--tertiary)",
+    accent: "bg-tertiary-fixed",
+    iconColor: "text-tertiary",
+    letterColor: "text-tertiary",
   },
   {
     title: "Student",
@@ -26,8 +28,9 @@ const roles = [
       "Peer Collaboration",
       "Gamified Badges",
     ],
-    accent: "var(--primary-fixed)",
-    iconColor: "var(--primary)",
+    accent: "bg-primary-fixed",
+    iconColor: "text-primary",
+    letterColor: "text-primary",
   },
   {
     title: "Parents",
@@ -36,8 +39,9 @@ const roles = [
       "Fee Payment Portal",
       "Direct Messaging",
     ],
-    accent: "var(--tertiary-fixed)",
-    iconColor: "var(--tertiary)",
+    accent: "bg-tertiary-fixed",
+    iconColor: "text-tertiary",
+    letterColor: "text-tertiary",
   },
 ];
 
@@ -57,20 +61,13 @@ const cardItem = {
 
 export function ExperienceSection() {
   return (
-    <section className="section">
-      <div className="container">
-        <div style={{ textAlign: "center", marginBottom: "var(--spacing-margin-lg)" }}>
-          <h2 className="text-headline-lg" style={{ marginBottom: 16 }}>
+    <section className="px-8 py-12">
+      <div className="container mx-auto max-w-[var(--container-max)]">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold font-display text-on-surface mb-4">
             A Tailored Experience for Everyone
           </h2>
-          <p
-            className="text-body-lg"
-            style={{
-              color: "var(--on-surface-variant)",
-              maxWidth: 560,
-              margin: "0 auto",
-            }}
-          >
+          <p className="text-lg text-on-surface-variant max-w-lg mx-auto">
             We understand that one size doesn&apos;t fit all. Our platform adapts
             to the user role.
           </p>
@@ -81,73 +78,37 @@ export function ExperienceSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
           variants={container}
-          className="grid"
-          style={{
-            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-            gap: "var(--spacing-gutter)",
-          }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {roles.map((role) => (
             <motion.div
               key={role.title}
               variants={cardItem}
-              className="card"
-              style={{ padding: 0, overflow: "hidden", cursor: "default" }}
+              className="bg-surface-lowest border border-outline-variant/30 rounded-3xl overflow-hidden cursor-default"
             >
               {/* Color Header */}
-              <div
-                style={{
-                  height: 192,
-                  background: role.accent,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <div
-                  style={{
-                    width: 80,
-                    height: 80,
-                    borderRadius: "var(--radius-full)",
-                    background: "rgba(255,255,255,0.3)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span className="text-display-lg" style={{ color: role.iconColor, fontSize: 32 }}>
+              <div className={`h-48 ${role.accent} flex items-center justify-center`}>
+                <div className="w-20 h-20 rounded-full bg-white/30 flex items-center justify-center">
+                  <span className={`text-4xl font-extrabold font-display ${role.letterColor}`}>
                     {role.title[0]}
                   </span>
                 </div>
               </div>
 
               {/* Content */}
-              <div style={{ padding: 24 }}>
-                <h4
-                  className="text-headline-sm"
-                  style={{ marginBottom: 16 }}
-                >
+              <div className="p-6">
+                <h4 className="text-xl font-semibold font-display text-on-surface mb-4">
                   {role.title}
                 </h4>
-                <ul
-                  style={{
-                    listStyle: "none",
-                    padding: 0,
-                    margin: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 8,
-                  }}
-                >
+                <ul className="list-none p-0 m-0 flex flex-col gap-2">
                   {role.features.map((feat) => (
                     <li
                       key={feat}
-                      className="flex text-body-sm"
-                      style={{ alignItems: "center", gap: 8, color: "var(--on-surface-variant)" }}
+                      className="flex items-center gap-2 text-sm text-on-surface-variant"
                     >
                       <CheckCircle2
                         size={18}
-                        style={{ color: role.iconColor, flexShrink: 0 }}
+                        className={`${role.iconColor} shrink-0`}
                       />
                       {feat}
                     </li>

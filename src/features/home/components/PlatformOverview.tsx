@@ -71,20 +71,13 @@ const cardItem = {
 
 export function PlatformOverview() {
   return (
-    <section className="section" style={{ background: "var(--surface)" }}>
-      <div className="container">
-        <div style={{ textAlign: "center", marginBottom: "var(--spacing-margin-lg)" }}>
-          <h2 className="text-headline-lg" style={{ marginBottom: 16 }}>
+    <section className="bg-surface px-8 py-12">
+      <div className="container mx-auto max-w-[var(--container-max)]">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold font-display text-on-surface mb-4">
             Everything You Need to Run Your Institute
           </h2>
-          <p
-            className="text-body-lg"
-            style={{
-              maxWidth: 640,
-              margin: "0 auto",
-              color: "var(--on-surface-variant)",
-            }}
-          >
+          <p className="text-lg text-on-surface-variant max-w-2xl mx-auto">
             A comprehensive suite of modules designed to handle academic,
             administrative, and collaborative tasks.
           </p>
@@ -95,33 +88,22 @@ export function PlatformOverview() {
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
           variants={container}
-          className="grid"
-          style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "var(--spacing-gutter)" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
           {features.map((feat) => (
             <motion.div
               key={feat.title}
               variants={cardItem}
-              className="card"
-              style={{ padding: 32, cursor: "default" }}
+              className="bg-surface-lowest border border-outline-variant/30 rounded-3xl p-8 cursor-default transition-all duration-normal hover:-translate-y-1 hover:shadow-lg"
             >
               <feat.icon
                 size={36}
-                style={{
-                  color: feat.accent ? "var(--tertiary)" : "var(--primary)",
-                  marginBottom: 24,
-                }}
+                className={`mb-6 ${feat.accent ? "text-tertiary" : "text-primary"}`}
               />
-              <h3
-                className="text-headline-sm"
-                style={{ marginBottom: 8 }}
-              >
+              <h3 className="text-xl font-semibold font-display text-on-surface mb-2">
                 {feat.title}
               </h3>
-              <p
-                className="text-body-sm"
-                style={{ color: "var(--on-surface-variant)" }}
-              >
+              <p className="text-sm text-on-surface-variant">
                 {feat.desc}
               </p>
             </motion.div>

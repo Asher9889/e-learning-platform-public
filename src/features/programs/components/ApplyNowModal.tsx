@@ -52,7 +52,7 @@ export function ApplyNowModal({
 
   return (
     <div
-      className="modal-backdrop"
+      className="fixed inset-0 z-modal-backdrop flex items-center justify-center bg-black/50 p-8"
       onClick={(e) => {
         if (e.target === e.currentTarget) onOpenChange(false);
       }}
@@ -62,98 +62,66 @@ export function ApplyNowModal({
         tabIndex={-1}
         role="dialog"
         aria-modal="true"
-        className="modal"
+        className="bg-surface-lowest rounded-3xl shadow-lg max-w-md w-full max-h-[90vh] overflow-auto relative"
       >
         {/* Close button */}
         <button
-          className="btn btn--secondary btn--icon"
+          className="absolute top-4 right-4 z-10 inline-flex items-center justify-center w-9 h-9 bg-surface-lowest text-on-surface border border-outline-variant rounded-full cursor-pointer hover:bg-surface-low hover:shadow-sm transition-all duration-fast p-0"
           onClick={() => onOpenChange(false)}
-          style={{
-            position: "absolute",
-            top: 16,
-            right: 16,
-            zIndex: 1,
-          }}
         >
           <X size={14} />
         </button>
 
         {/* Header */}
-        <div className="modal__body">
-          <h2
-            className="text-headline-md"
-            style={{ marginBottom: 4, paddingRight: 32 }}
-          >
+        <div className="p-6">
+          <h2 className="text-2xl font-semibold font-display text-on-surface mb-1 pr-8">
             {program.name}
           </h2>
-          <p className="text-body-sm text-muted" style={{ marginBottom: 20 }}>
+          <p className="text-sm text-on-surface-variant opacity-70 mb-5">
             review program details before starting your application.
           </p>
 
           {/* Details grid */}
-          <div
-            style={{
-              border: "1px solid var(--outline-variant)",
-              borderRadius: "var(--radius-xl)",
-              padding: 20,
-              marginBottom: 20,
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 16,
-            }}
-          >
+          <div className="border border-outline-variant rounded-3xl p-5 mb-5 grid grid-cols-2 gap-4">
             {[
               {
                 icon: IndianRupee,
                 label: "program fee",
                 value: program.fee,
-                valueColor: "var(--primary)",
+                valueColor: "text-primary",
               },
               {
                 icon: Clock,
                 label: "duration",
                 value: program.duration,
-                valueColor: "var(--on-surface)",
+                valueColor: "text-on-surface",
               },
               {
                 icon: GraduationCap,
                 label: "mode",
                 value: program.mode,
-                valueColor: "var(--on-surface)",
+                valueColor: "text-on-surface",
               },
               {
                 icon: CheckCircle2,
                 label: "eligibility",
                 value: program.eligibility,
-                valueColor: "var(--on-surface)",
+                valueColor: "text-on-surface",
               },
             ].map((item) => (
               <div
                 key={item.label}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                }}
+                className="flex items-center gap-2"
               >
                 <item.icon
                   size={16}
-                  style={{ color: "var(--on-surface-variant)", opacity: 0.5 }}
+                  className="text-on-surface-variant opacity-50"
                 />
                 <div>
-                  <p
-                    className="text-body-sm text-muted"
-                    style={{ margin: 0, opacity: 0.5 }}
-                  >
+                  <p className="text-sm text-on-surface-variant opacity-50 m-0">
                     {item.label}
                   </p>
-                  <p
-                    className="text-headline-sm"
-                    style={{
-                      margin: 0,
-                      color: item.valueColor,
-                    }}
-                  >
+                  <p className={`text-xl font-semibold font-display m-0 ${item.valueColor}`}>
                     {item.value}
                   </p>
                 </div>
@@ -163,40 +131,19 @@ export function ApplyNowModal({
 
           {/* Benefits */}
           {program.benefits && program.benefits.length > 0 && (
-            <div
-              style={{
-                border: "1px solid var(--outline-variant)",
-                borderRadius: "var(--radius-xl)",
-                padding: 20,
-                marginBottom: 24,
-              }}
-            >
-              <h4
-                className="text-headline-sm"
-                style={{ marginBottom: 12 }}
-              >
+            <div className="border border-outline-variant rounded-3xl p-5 mb-6">
+              <h4 className="text-xl font-semibold font-display text-on-surface mb-3">
                 benefits
               </h4>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 8,
-                }}
-              >
+              <div className="flex flex-col gap-2">
                 {program.benefits.map((benefit) => (
                   <div
                     key={benefit}
-                    className="text-body-sm text-muted flex"
-                    style={{ gap: 8, alignItems: "flex-start" }}
+                    className="flex items-start gap-2 text-sm text-on-surface-variant"
                   >
                     <CheckCircle2
                       size={14}
-                      style={{
-                        color: "var(--primary)",
-                        marginTop: 2,
-                        flexShrink: 0,
-                      }}
+                      className="text-primary mt-0.5 shrink-0"
                     />
                     {benefit}
                   </div>
@@ -207,13 +154,8 @@ export function ApplyNowModal({
 
           {/* Action */}
           <button
-            className="btn btn--primary"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl font-semibold text-base font-display cursor-pointer border-none hover:bg-on-primary-container hover:shadow-md transition-all duration-fast"
             onClick={handleStartAdmission}
-            style={{
-              width: "100%",
-              padding: "12px 24px",
-              fontSize: 16,
-            }}
           >
             start admission process
           </button>

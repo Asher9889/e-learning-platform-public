@@ -1,51 +1,19 @@
 export function FooterSection() {
   return (
-    <footer
-      style={{
-        borderTop: "1px solid var(--outline-variant)",
-        background: "var(--surface-container-low)",
-      }}
-    >
-      <div
-        className="container flex flex--between"
-        style={{
-          padding: "32px var(--spacing-container-padding)",
-          flexWrap: "wrap",
-          gap: 16,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+    <footer className="border-t border-outline-variant bg-surface-low">
+      <div className="container mx-auto flex flex-col md:flex-row md:items-center md:justify-between px-8 py-8 flex-wrap gap-4 max-w-[var(--container-max)]">
+        <div className="flex items-center gap-2">
           <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-            <rect
-              x="4"
-              y="6"
-              width="24"
-              height="20"
-              rx="3"
-              stroke="var(--on-surface)"
-              strokeWidth="1.5"
-              fill="var(--surface-container-lowest)"
-            />
-            <path
-              d="M16 14L22 18L16 22L10 18L16 14Z"
-              fill="var(--on-surface)"
-            />
-            <circle cx="16" cy="18" r="2" fill="var(--primary)" />
-            <path
-              d="M10 10H22"
-              stroke="var(--on-surface)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
+            <rect x="4" y="6" width="24" height="20" rx="3" stroke="var(--color-on-surface)" strokeWidth="1.5" fill="var(--color-surface-lowest)" />
+            <path d="M16 14L22 18L16 22L10 18L16 14Z" fill="var(--color-on-surface)" />
+            <circle cx="16" cy="18" r="2" fill="var(--color-primary)" />
+            <path d="M10 10H22" stroke="var(--color-on-surface)" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
-          <span
-            className="text-headline-sm"
-            style={{ color: "var(--on-surface)" }}
-          >
+          <span className="text-xl font-semibold font-display text-on-surface">
             elearn
           </span>
         </div>
-        <p className="text-body-sm text-muted">
+        <p className="text-sm text-on-surface-variant opacity-70">
           &copy; {new Date().getFullYear()} elearn — building futures through
           education.
         </p>

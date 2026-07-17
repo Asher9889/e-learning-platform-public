@@ -3,93 +3,37 @@ import { motion, easeOut } from "framer-motion";
 
 export function CTASection() {
   return (
-    <section
-      className="section"
-      style={{
-        padding: "128px 0",
-        background: "var(--on-surface)",
-        color: "#ffffff",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
+    <section className="bg-on-surface text-white relative overflow-hidden pb-32">
       {/* Subtle glow */}
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 600,
-          height: 600,
-          borderRadius: "var(--radius-full)",
-          background: "var(--primary)",
-          opacity: 0.08,
-          filter: "blur(100px)",
-          pointerEvents: "none",
-        }}
-      />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary opacity-[0.08] blur-[100px] pointer-events-none" />
 
-      <div className="container" style={{ position: "relative", zIndex: 1 }}>
+      <div className="container mx-auto relative z-10 px-8 max-w-[var(--container-max)]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: easeOut }}
-          style={{
-            maxWidth: 768,
-            margin: "0 auto",
-            textAlign: "center",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 32,
-          }}
+          className="max-w-2xl mx-auto text-center flex flex-col items-center gap-8"
         >
-          <span
-            className="badge"
-            style={{
-              background: "rgba(255,255,255,0.1)",
-              color: "#ffffff",
-            }}
-          >
+          <span className="px-3 py-1 rounded-full text-xs font-bold font-display bg-white/10 text-white">
             More Than an LMS
           </span>
 
-          <h2 className="text-display-lg" style={{ color: "#ffffff" }}>
+          <h2 className="text-4xl md:text-5xl font-extrabold font-display text-white">
             Ready to Modernize Your Institution?
           </h2>
 
-          <p
-            className="text-body-lg"
-            style={{
-              color: "rgba(255,255,255,0.7)",
-              maxWidth: 600,
-            }}
-          >
+          <p className="text-lg text-white/70 max-w-lg">
             Join 500+ global institutions that have transitioned to a unified
             digital campus. Scalable, secure, and built for the future of
             learning.
           </p>
 
-          <div className="flex flex--wrap flex--center" style={{ gap: 16 }}>
-            <button
-              className="btn btn--primary"
-              style={{ padding: "16px 40px", fontSize: 18 }}
-            >
+          <div className="flex flex-wrap justify-center gap-4">
+            <button className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-primary text-on-primary rounded-xl font-semibold text-lg font-display cursor-pointer border-none hover:bg-on-primary-container hover:shadow-md transition-all duration-fast">
               Book a Personalized Demo
             </button>
-            <button
-              className="btn"
-              style={{
-                padding: "16px 40px",
-                fontSize: 18,
-                background: "rgba(255,255,255,0.1)",
-                color: "#ffffff",
-                border: "1px solid rgba(255,255,255,0.2)",
-                borderRadius: "var(--radius-xl)",
-              }}
-            >
+            <button className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white/10 text-white border border-white/20 rounded-xl font-semibold text-lg font-display cursor-pointer hover:bg-white/20 transition-all duration-fast">
               Contact Sales
             </button>
           </div>
@@ -101,23 +45,10 @@ export function CTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2, ease: easeOut }}
-          style={{
-            marginTop: 96,
-            maxWidth: 1024,
-            margin: "96px auto 0",
-            borderRadius: "48px 48px 0 0",
-            overflow: "hidden",
-            border: "1px solid rgba(255,255,255,0.1)",
-            borderBottom: "none",
-            background: "var(--surface-container-lowest)",
-            aspectRatio: "16/9",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          className="mt-24 max-w-4xl mx-auto rounded-t-[48px] overflow-hidden border border-white/10 border-b-0 bg-surface-lowest aspect-video flex items-center justify-center"
         >
-          <div style={{ textAlign: "center", opacity: 0.3 }}>
-            <p className="text-headline-sm">Dashboard Preview</p>
+          <div className="text-center opacity-30">
+            <p className="text-xl font-semibold font-display">Dashboard Preview</p>
           </div>
         </motion.div>
       </div>

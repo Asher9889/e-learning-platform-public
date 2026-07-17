@@ -28,28 +28,20 @@ const cardItem = {
 
 function SkeletonCard() {
   return (
-    <div className="card" style={{ padding: 0, overflow: "hidden" }}>
-      <div className="skeleton" style={{ aspectRatio: "16/9" }} />
-      <div style={{ padding: 24 }}>
-        <div
-          className="skeleton"
-          style={{ height: 20, width: "70%", marginBottom: 12 }}
-        />
-        <div
-          className="skeleton"
-          style={{ height: 12, width: "100%", marginBottom: 6 }}
-        />
-        <div
-          className="skeleton"
-          style={{ height: 12, width: "80%", marginBottom: 18 }}
-        />
-        <div
-          className="skeleton"
-          style={{ height: 14, width: "40%", marginBottom: 18 }}
-        />
-        <div className="flex gap-sm">
-          <div className="skeleton" style={{ flex: 1, height: 36 }} />
-          <div className="skeleton" style={{ flex: 1, height: 36 }} />
+    <div className="bg-surface-lowest border border-outline-variant/20 rounded-2xl overflow-hidden" style={{ borderLeftWidth: "4px", borderLeftColor: "var(--color-outline-variant)" }}>
+      <div className="p-6 pt-5">
+        <div className="skeleton h-6 w-3/4 mb-3 rounded-lg" />
+        <div className="skeleton h-3.5 w-full mb-1.5 rounded" />
+        <div className="skeleton h-3.5 w-4/5 mb-4 rounded" />
+        <div className="flex gap-2 mb-5">
+          <div className="skeleton h-5 w-16 rounded-md" />
+          <div className="skeleton h-5 w-14 rounded-md" />
+          <div className="skeleton h-5 w-20 rounded-md" />
+        </div>
+        <div className="skeleton h-7 w-28 mb-5 rounded" />
+        <div className="flex gap-3">
+          <div className="skeleton flex-1 h-10 rounded-xl" />
+          <div className="skeleton w-20 h-10 rounded-xl" />
         </div>
       </div>
     </div>
@@ -65,8 +57,8 @@ export function ProgramGrid({
 }: ProgramGridProps) {
   if (isLoading) {
     return (
-      <section className="section">
-        <div className="container grid grid--auto" style={{ gap: 20 }}>
+      <section className="px-8 py-14">
+        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[var(--container-max)]">
           {Array.from({ length: 6 }).map((_, i) => (
             <SkeletonCard key={i} />
           ))}
@@ -80,24 +72,20 @@ export function ProgramGrid({
   }
 
   return (
-    <section className="section">
-      <div className="container">
+    <section className="px-8 py-14">
+      <div className="container mx-auto max-w-[var(--container-max)]">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease: easeOut }}
-          style={{ marginBottom: 28 }}
+          className="mb-8"
         >
-          <h2
-            className="text-headline-lg"
-            style={{ margin: "0 0 4px" }}
-          >
+          <h2 className="text-4xl md:text-5xl font-extrabold font-display text-on-surface m-0 mb-1 leading-tight">
             all programs
           </h2>
-          <p className="text-body-sm text-muted">
-            showing {programs.length} program
-            {programs.length !== 1 ? "s" : ""}
+          <p className="text-base text-on-surface-variant">
+            showing {programs.length} program{programs.length !== 1 ? "s" : ""}
           </p>
         </motion.div>
         <motion.div
@@ -105,8 +93,7 @@ export function ProgramGrid({
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
           variants={container}
-          className="grid grid--auto"
-          style={{ gap: 20 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
         >
           {programs.map((program) => (
             <motion.div key={program.id} variants={cardItem}>

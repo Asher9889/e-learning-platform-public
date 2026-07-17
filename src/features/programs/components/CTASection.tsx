@@ -1,6 +1,6 @@
 "use client";
 import { motion, easeOut } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 
 interface CTASectionProps {
   onApplyNow: () => void;
@@ -12,133 +12,65 @@ export function CTASection({
   onContactAdmissions,
 }: CTASectionProps) {
   return (
-    <section className="section" style={{ paddingBottom: 80 }}>
+    <section className="px-8 pb-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.6, ease: easeOut }}
-        className="container"
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="container mx-auto max-w-[var(--container-max)]"
       >
-        <div
-          className="card"
-          style={{
-            padding: "56px 40px",
-            textAlign: "center",
-            position: "relative",
-            overflow: "hidden",
-            background: "var(--surface-container-low)",
-            cursor: "default",
-          }}
-        >
-          {/* Sticker decorations */}
-          <motion.div
-            className="badge badge--school"
-            initial={{ opacity: 0, scale: 0, rotate: -8 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: -8 }}
-            viewport={{ once: true }}
-            transition={{
-              type: "spring" as const,
-              stiffness: 200,
-              damping: 14,
-              delay: 0.3,
-            }}
-            style={{
-              position: "absolute",
-              top: 20,
-              left: 20,
-              padding: 8,
-            }}
-          >
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-              <circle
-                cx="18"
-                cy="18"
-                r="16"
-                fill="var(--category-school)"
-                stroke="var(--on-surface)"
-                strokeWidth="2"
-              />
-              <path
-                d="M12 18L16 22L24 14"
-                stroke="var(--on-surface)"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </motion.div>
-          <motion.div
-            className="badge badge--professional"
-            initial={{ opacity: 0, scale: 0, rotate: 12 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 12 }}
-            viewport={{ once: true }}
-            transition={{
-              type: "spring" as const,
-              stiffness: 200,
-              damping: 14,
-              delay: 0.45,
-            }}
-            style={{
-              position: "absolute",
-              bottom: 20,
-              right: 20,
-              padding: 8,
-            }}
-          >
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <rect
-                x="2"
-                y="2"
-                width="28"
-                height="28"
-                rx="6"
-                fill="var(--category-professional)"
-                stroke="var(--on-surface)"
-                strokeWidth="2"
-              />
-              <path
-                d="M16 8V24M8 16H24"
-                stroke="var(--on-surface)"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </motion.div>
+        <div className="relative bg-primary rounded-3xl px-10 md:px-16 py-16 text-center overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute -top-10 -right-10 w-48 h-48 border-4 border-white rounded-full" />
+            <div className="absolute -bottom-8 -left-8 w-36 h-36 border-4 border-white rounded-full" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[200px] font-extrabold font-display text-white/5 leading-none select-none">
+              ?
+            </div>
+          </div>
 
-          <h2
-            className="text-headline-lg"
-            style={{
-              margin: "0 auto 12px",
-              maxWidth: 600,
-            }}
-          >
-            ready to start your learning journey?
-          </h2>
-          <p
-            className="text-body-md text-muted"
-            style={{
-              maxWidth: 500,
-              margin: "0 auto 28px",
-            }}
-          >
-            apply today and take the next step toward your academic and
-            professional success.
-          </p>
-          <div className="flex flex--center flex--wrap gap-sm">
-            <button
-              className="btn btn--primary"
-              onClick={onApplyNow}
+          <div className="relative z-10">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1, ease: easeOut }}
+              className="text-4xl md:text-5xl font-extrabold font-display text-white mx-auto mb-4 max-w-lg leading-tight"
             >
-              apply now
-              <ArrowRight size={16} />
-            </button>
-            <button
-              className="btn btn--secondary"
-              onClick={onContactAdmissions}
+              ready to start?
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2, ease: easeOut }}
+              className="text-base text-white/80 mx-auto mb-8 max-w-md leading-relaxed"
             >
-              contact admissions
-            </button>
+              apply today and take the next step toward your academic and professional success.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3, ease: easeOut }}
+              className="flex flex-wrap justify-center gap-4"
+            >
+              <button
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-on-surface rounded-2xl font-bold text-base font-display cursor-pointer border-none hover:bg-white/90 hover:shadow-lg transition-all duration-fast"
+                onClick={onApplyNow}
+              >
+                apply now
+                <ArrowRight size={18} />
+              </button>
+              <button
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/15 text-white rounded-2xl font-bold text-base font-display cursor-pointer border border-white/30 hover:bg-white/25 transition-all duration-fast"
+                onClick={onContactAdmissions}
+              >
+                <Phone size={16} />
+                contact admissions
+              </button>
+            </motion.div>
           </div>
         </div>
       </motion.div>

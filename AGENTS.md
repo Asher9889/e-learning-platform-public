@@ -11,8 +11,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 **Always use tokens, never hardcode values.**
 
 ### File Structure
-- `src/styles/tokens.css` — All CSS custom properties (colors, typography, spacing, radii, shadows)
-- `src/styles/components.css` — Reusable UI patterns (buttons, cards, badges, inputs, modals)
+- `app/globals.css` — Tailwind v4 `@theme` block — **single source of truth** for all design tokens (colors, typography, spacing, radii, shadows)
+- `src/styles/components.css` — Base reset + skeleton loading
 - `DESIGN.md` — Full design system documentation
 - `PRODUCT.md` — Strategic product context
 
@@ -35,7 +35,13 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Use font shorthand: `font: var(--text-headline-lg)` or `font: var(--text-body-md)`
 
 ### Spacing
-- Use `--spacing-unit` (8px) as base
+- `--spacing-xs` (4px) — micro
+- `--spacing-sm` (8px) — small
+- `--spacing-md` (16px) — medium
+- `--spacing-lg` (24px) — large
+- `--spacing-xl` (32px) — extra large
+- `--spacing-2xl` (48px) — extra extra large
+- `--spacing-unit` (8px) — base unit
 - Container padding: `--spacing-container-padding` (32px)
 - Gutters: `--spacing-gutter` (24px)
 

@@ -6,50 +6,24 @@ interface EmptyProgramsProps {
 
 export function EmptyPrograms({ onResetFilters }: EmptyProgramsProps) {
   return (
-    <section className="section" style={{ paddingBottom: 80 }}>
-      <div className="container">
-        <div
-          className="card"
-          style={{
-            padding: "56px 40px",
-            textAlign: "center",
-            cursor: "default",
-          }}
-        >
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: "var(--radius-full)",
-              border: "1px solid var(--outline-variant)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "0 auto 16px",
-              color: "var(--on-surface-variant)",
-            }}
-          >
-            <SearchX size={24} />
+    <section className="px-8 py-20">
+      <div className="container mx-auto max-w-[var(--container-max)]">
+        <div className="bg-surface-lowest border border-outline-variant/20 rounded-3xl px-10 py-16 text-center cursor-default max-w-lg mx-auto">
+          <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <SearchX size={28} className="text-primary" />
           </div>
-          <h2
-            className="text-headline-md"
-            style={{ marginBottom: 8 }}
-          >
+          <h2 className="text-3xl font-extrabold font-display text-on-surface mb-2">
             no programs found
           </h2>
-          <p
-            className="text-body-sm text-muted"
-            style={{ marginBottom: 24 }}
-          >
-            try adjusting your filters or search criteria.
+          <p className="text-sm text-on-surface-variant mb-8 leading-relaxed">
+            try adjusting your filters or search criteria to find what you&apos;re looking for.
           </p>
           <button
-            className="btn btn--secondary"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl font-bold text-sm font-display cursor-pointer border-none hover:bg-on-primary-container hover:shadow-md transition-all duration-fast"
             onClick={onResetFilters}
-            style={{ display: "inline-flex", margin: "0 auto" }}
           >
             <RotateCcw size={14} />
-            reset filters
+            reset all filters
           </button>
         </div>
       </div>

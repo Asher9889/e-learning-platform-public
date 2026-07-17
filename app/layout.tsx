@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/src/components/layout/Header";
+import { TopNavBar } from "@/src/features/home/components/TopNavBar";
 
 export const metadata: Metadata = {
   title: "elearn",
@@ -17,6 +17,7 @@ export default function RootLayout({
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         {/* <Header /> */}
+         <TopNavBar />
         {children}
       </body>
     </html>

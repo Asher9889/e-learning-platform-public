@@ -1,6 +1,6 @@
 "use client";
 import { motion, easeOut } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
 import { useState } from "react";
 
 const faqs = [
@@ -33,15 +33,15 @@ const faqs = [
 
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.07 } },
+  visible: { transition: { staggerChildren: 0.06 } },
 };
 
 const faqItem = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, ease: easeOut },
+    transition: { duration: 0.4, ease: easeOut },
   },
 };
 
@@ -49,83 +49,79 @@ export function ProgramFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section
-      className="section"
-      style={{ background: "var(--surface-container-low)" }}
-    >
-      <div style={{ maxWidth: 720, margin: "0 auto" }}>
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: easeOut }}
-          style={{ marginBottom: 36, textAlign: "center" }}
-        >
-          <h2
-            className="text-headline-lg"
-            style={{ margin: "0 0 6px" }}
+    <section className="px-8 py-16">
+      <div className="container mx-auto max-w-[var(--container-max)]">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 items-start">
+          {/* Left — heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, ease: easeOut }}
+            className="lg:sticky lg:top-28"
           >
-            frequently asked questions
-          </h2>
-          <p className="text-body-sm text-muted">
-            everything you need to know about our programs and admission
-            process.
-          </p>
-        </motion.div>
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 mb-4">
+              <HelpCircle size={22} className="text-primary" />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-extrabold font-display text-on-surface m-0 mb-3 leading-tight">
+              got
+              <br />
+              questions?
+            </h2>
+            <p className="text-base text-on-surface-variant max-w-xs leading-relaxed">
+              everything you need to know about our programs and the admission process.
+            </p>
+          </motion.div>
 
-        {/* Accordion */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
-          variants={container}
-          style={{ display: "flex", flexDirection: "column", gap: 8 }}
-        >
-          {faqs.map((faq, index) => {
-            const isOpen = openIndex === index;
-            return (
-              <motion.div
-                key={index}
-                variants={faqItem}
-                className="card accordion-item"
-                style={{ padding: 0, overflow: "hidden" }}
-                onClick={() => setOpenIndex(isOpen ? null : index)}
-              >
-                <div className="accordion-item__header">
-                  <span
-                    className="text-headline-sm"
-                    style={{ color: "var(--on-surface)" }}
-                  >
-                    {faq.question}
-                  </span>
-                  <ChevronDown
-                    size={18}
-                    style={{
-                      color: "var(--primary)",
-                      transition: "transform var(--duration-normal) var(--ease-out)",
-                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-                      flexShrink: 0,
-                    }}
-                  />
-                </div>
+          {/* Right — accordion */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+            variants={container}
+            className="flex flex-col gap-3"
+          >
+            {faqs.map((faq, index) => {
+              const isOpen = openIndex === index;
+              return (
                 <motion.div
-                  initial={false}
-                  animate={{
-                    height: isOpen ? "auto" : 0,
-                    opacity: isOpen ? 1 : 0,
+                  key={index}
+                  variants={faqItem}
+                  className="bg-surface-lowest border border-outline-variant/20 rounded-2xl overflow-hidden cursor-pointer transition-all duration-fast hover:shadow-md"
+                  style={{
+                    borderLeftWidth: isOpen ? "4px" : "0px",
+                    borderLeftColor: isOpen ? "var(--color-primary)" : "transparent",
                   }}
-                  transition={{ duration: 0.3, ease: easeOut }}
-                  style={{ overflow: "hidden" }}
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
                 >
-                  <div className="accordion-item__content text-body-sm text-muted">
-                    {faq.answer}
+                  <div className="flex items-center justify-between py-5 px-6 gap-4">
+                    <span className="text-lg font-bold font-display text-on-surface">
+                      {faq.question}
+                    </span>
+                    <ChevronDown
+                      size={18}
+                      className="text-primary shrink-0 transition-transform duration-normal"
+                      style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                    />
                   </div>
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: isOpen ? "auto" : 0,
+                      opacity: isOpen ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.3, ease: easeOut }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6 text-sm text-on-surface-variant leading-relaxed">
+                      {faq.answer}
+                    </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

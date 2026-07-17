@@ -25,99 +25,43 @@ const unifiedSteps = [
 
 export function PlatformComparison() {
   return (
-    <section
-      className="section"
-      style={{ background: "var(--surface-container-low)" }}
-    >
-      <div className="container">
-        <div style={{ textAlign: "center", marginBottom: "var(--spacing-margin-lg)" }}>
-          <h2 className="text-headline-lg" style={{ marginBottom: 16 }}>
+    <section className="bg-surface-low px-8 py-12">
+      <div className="container mx-auto max-w-[var(--container-max)]">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold font-display text-on-surface mb-4">
             Unified Student Records vs The Rest
           </h2>
-          <p
-            className="text-body-lg"
-            style={{ color: "var(--on-surface-variant)" }}
-          >
+          <p className="text-lg text-on-surface-variant">
             See how our platform consolidates a student&apos;s entire journey.
           </p>
         </div>
 
-        <div
-          className="grid"
-          style={{
-            gridTemplateColumns: "1fr 1fr",
-            gap: "var(--spacing-gutter)",
-          }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Traditional */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: easeOut }}
-            className="card"
-            style={{ padding: 40, cursor: "default" }}
+            className="bg-surface-lowest border border-outline-variant/30 rounded-3xl p-10 cursor-default"
           >
-            <h4
-              className="text-headline-sm"
-              style={{
-                marginBottom: 32,
-                color: "var(--on-surface-variant)",
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-              }}
-            >
+            <h4 className="text-xl font-semibold font-display text-on-surface-variant mb-8 flex items-center gap-2">
               <History size={20} />
               Traditional Management
             </h4>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 32,
-                position: "relative",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  left: 15,
-                  top: 0,
-                  bottom: 0,
-                  width: 2,
-                  background: "var(--outline-variant)",
-                  opacity: 0.3,
-                }}
-              />
+            <div className="flex flex-col gap-8 relative">
+              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-outline-variant opacity-30" />
               {traditionalSteps.map((step) => (
                 <div
                   key={step.title}
-                  className="flex"
-                  style={{ gap: 24, position: "relative" }}
+                  className="flex gap-6 relative"
                 >
-                  <div
-                    style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: "var(--radius-full)",
-                      background: "var(--outline-variant)",
-                      opacity: 0.3,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      zIndex: 1,
-                      flexShrink: 0,
-                    }}
-                  />
+                  <div className="w-8 h-8 rounded-full bg-outline-variant opacity-30 flex items-center justify-center z-10 shrink-0" />
                   <div>
-                    <p className="text-label-md" style={{ marginBottom: 4 }}>
+                    <p className="text-sm font-semibold font-display text-on-surface mb-1">
                       {step.title}
                     </p>
-                    <p
-                      className="text-body-sm"
-                      style={{ color: "var(--on-surface-variant)" }}
-                    >
+                    <p className="text-sm text-on-surface-variant">
                       {step.desc}
                     </p>
                   </div>
@@ -132,99 +76,28 @@ export function PlatformComparison() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1, ease: easeOut }}
-            style={{
-              padding: 40,
-              borderRadius: 32,
-              background: "var(--primary-container)",
-              border: "2px solid var(--primary-container)",
-              position: "relative",
-              overflow: "hidden",
-              cursor: "default",
-            }}
+            className="p-10 rounded-3xl bg-primary-container border-2 border-primary-container relative overflow-hidden cursor-default"
           >
-            <div
-              style={{
-                position: "absolute",
-                right: -80,
-                bottom: -80,
-                width: 256,
-                height: 256,
-                borderRadius: "var(--radius-full)",
-                background: "var(--primary)",
-                opacity: 0.05,
-              }}
-            />
-            <h4
-              className="text-headline-sm"
-              style={{
-                marginBottom: 32,
-                color: "var(--on-primary-container)",
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-              }}
-            >
+            <div className="absolute -right-20 -bottom-20 w-64 h-64 rounded-full bg-primary opacity-5" />
+            <h4 className="text-xl font-semibold font-display text-on-primary-container mb-8 flex items-center gap-2 relative z-10">
               <Network size={20} />
               Unified Records
             </h4>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 32,
-                position: "relative",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  left: 15,
-                  top: 0,
-                  bottom: 0,
-                  width: 2,
-                  background: "var(--primary)",
-                  opacity: 0.3,
-                }}
-              />
+            <div className="flex flex-col gap-8 relative z-10">
+              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-primary opacity-30" />
               {unifiedSteps.map((step) => (
                 <div
                   key={step.title}
-                  className="flex"
-                  style={{ gap: 24, position: "relative" }}
+                  className="flex gap-6 relative"
                 >
-                  <div
-                    style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: "var(--radius-full)",
-                      background: "var(--primary-container)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      zIndex: 1,
-                      flexShrink: 0,
-                      boxShadow: "var(--shadow-md)",
-                    }}
-                  >
-                    <Check
-                      size={16}
-                      style={{ color: "var(--on-primary)" }}
-                    />
+                  <div className="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center z-10 shrink-0 shadow-md">
+                    <Check size={16} className="text-on-primary" />
                   </div>
                   <div>
-                    <p
-                      className="text-label-md"
-                      style={{
-                        marginBottom: 4,
-                        color: "var(--on-primary-container)",
-                      }}
-                    >
+                    <p className="text-sm font-semibold font-display text-on-primary-container mb-1">
                       {step.title}
                     </p>
-                    <p
-                      className="text-body-sm"
-                      style={{ color: "var(--on-secondary-container)" }}
-                    >
+                    <p className="text-sm text-on-secondary-container">
                       {step.desc}
                     </p>
                   </div>

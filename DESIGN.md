@@ -175,10 +175,10 @@ A sophisticated blend of **Corporate Modern** structure and **Soft Minimalism**.
 
 ## Category Colors (Semantic)
 
-| Category | Color | Background |
-|----------|-------|------------|
-| School | `#3b82f6` | `#eff6ff` |
-| Diploma | `#22c55e` | `#f0fdf4` |
-| Undergraduate | `#a855f7` | `#faf5ff` |
-| Postgraduate | `#f97316` | `#fff7ed` |
-| Professional | `#e11d48` | `#fff1f2` |
+| Category | Color | Background | Gradient End |
+|----------|-------|------------|--------------|
+| School | `#3b82f6` | `#eff6ff` | `#1d4ed8` |
+| Diploma | `#22c55e` | `#f0fdf4` | `#15803d` |
+| Undergraduate | `#a855f7` | `#faf5ff` | `#7c3aed` |
+| Postgraduate | `#f97316` | `#fff7ed` | `#ea580c` |
+| Professional | `#e11d48` | `#fff1f2` | `#be123c` |

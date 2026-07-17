@@ -61,7 +61,7 @@ export default function ProgramsPage() {
   }, []);
 
   return (
-    <div style={{ minHeight: "100vh", overflowX: "hidden" }}>
+    <div className="min-h-screen overflow-x-hidden">
       <HeroSection
         onBrowsePrograms={handleBrowsePrograms}
         onContactAdmissions={handleContactAdmissions}

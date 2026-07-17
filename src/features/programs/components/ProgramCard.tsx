@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { Clock, GraduationCap, IndianRupee, ArrowRight } from "lucide-react";
+import { Clock, GraduationCap, IndianRupee, ArrowRight, Wifi, MapPin, Layers } from "lucide-react";
 import type { Program } from "../types/program.types";
 
 interface ProgramCardProps {
@@ -8,21 +7,26 @@ interface ProgramCardProps {
   onApplyNow: (program: Program) => void;
 }
 
-const categoryGradients: Record<string, string> = {
-  School: "linear-gradient(135deg, var(--category-school) 0%, #1d4ed8 100%)",
-  Diploma: "linear-gradient(135deg, var(--category-diploma) 0%, #15803d 100%)",
-  Undergraduate:
-    "linear-gradient(135deg, var(--category-undergraduate) 0%, #7c3aed 100%)",
-  Postgraduate:
-    "linear-gradient(135deg, var(--category-postgraduate) 0%, #ea580c 100%)",
-  Professional:
-    "linear-gradient(135deg, var(--category-professional) 0%, #be123c 100%)",
+const categoryBorders: Record<string, string> = {
+  School: "var(--color-category-school)",
+  Diploma: "var(--color-category-diploma)",
+  Undergraduate: "var(--color-category-undergraduate)",
+  Postgraduate: "var(--color-category-postgraduate)",
+  Professional: "var(--color-category-professional)",
 };
 
-const modeLabels: Record<string, string> = {
-  Online: "online",
-  Offline: "offline",
-  Hybrid: "hybrid",
+const categoryBg: Record<string, string> = {
+  School: "var(--color-category-school-bg)",
+  Diploma: "var(--color-category-diploma-bg)",
+  Undergraduate: "var(--color-category-undergraduate-bg)",
+  Postgraduate: "var(--color-category-postgraduate-bg)",
+  Professional: "var(--color-category-professional-bg)",
+};
+
+const modeIcons: Record<string, typeof Wifi> = {
+  Online: Wifi,
+  Offline: MapPin,
+  Hybrid: Layers,
 };
 
 export function ProgramCard({
@@ -30,169 +34,77 @@ export function ProgramCard({
   onViewDetails,
   onApplyNow,
 }: ProgramCardProps) {
+  const border = categoryBorders[program.category] || "var(--color-outline)";
+  const bg = categoryBg[program.category] || "var(--color-surface-low)";
+  const ModeIcon = modeIcons[program.mode] || Wifi;
+
   return (
-    <div className="card" style={{ padding: 0, overflow: "hidden" }}>
-      {/* Thumbnail */}
-      <div
-        style={{
-          aspectRatio: "16/9",
-          overflow: "hidden",
-          background: categoryGradients[program.category],
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {program.thumbnail ? (
-          <Image
-            src={program.thumbnail}
-            alt={program.name}
-            fill
-            style={{ objectFit: "cover" }}
-          />
-        ) : (
-          <div
-            style={{
-              textAlign: "center",
-              color: "#fff",
-              opacity: 0.3,
-            }}
-          >
-            <GraduationCap size={40} style={{ margin: "0 auto 8px" }} />
-            <span
-              className="text-label-sm"
-              style={{
-                color: "#fff",
-                letterSpacing: "0.05em",
-              }}
-            >
-              {program.name}
-            </span>
-          </div>
-        )}
-        {/* Category badge */}
-        <div
-          className="badge"
-          style={{
-            position: "absolute",
-            left: 12,
-            top: 12,
-            color: "#fff",
-            background: "rgba(0,0,0,0.3)",
-            backdropFilter: "blur(4px)",
-          }}
+    <div
+      className="group relative bg-surface-lowest rounded-2xl overflow-hidden transition-all duration-normal hover:-translate-y-1 hover:shadow-lg border border-outline-variant/20"
+      style={{ borderLeftWidth: "4px", borderLeftColor: border }}
+    >
+      {/* Category pill — top right */}
+      <div className="absolute top-4 right-4 z-10">
+        <span
+          className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold font-display text-white shadow-sm"
+          style={{ background: border }}
         >
           {program.category}
-        </div>
+        </span>
       </div>
 
-      {/* Content */}
-      <div className="card__body">
-        <h3
-          className="text-headline-sm"
-          style={{
-            marginBottom: 8,
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-        >
+      <div className="p-6 pt-5">
+        {/* Program name — large, bold */}
+        <h3 className="text-xl font-bold font-display text-on-surface mb-2.5 pr-16 leading-snug">
           {program.name}
         </h3>
 
-        <p
-          className="text-body-sm text-muted"
-          style={{
-            marginBottom: 18,
-            display: "-webkit-box",
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-        >
+        {/* Description */}
+        <p className="text-sm text-on-surface-variant mb-4 line-clamp-2 leading-relaxed">
           {program.description}
         </p>
 
-        {/* Info rows */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 8,
-            marginBottom: 14,
-          }}
-        >
-          <div
-            className="text-label-sm"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              color: "var(--on-surface-variant)",
-            }}
-          >
-            <Clock size={14} />
+        {/* Metadata pills */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold font-display bg-surface-low text-on-surface-variant">
+            <Clock size={11} />
             {program.duration}
-          </div>
-          <div
-            className="text-label-sm"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              color: "var(--on-surface-variant)",
-            }}
+          </span>
+          <span
+            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold font-display"
+            style={{ background: bg, color: border }}
           >
-            {modeLabels[program.mode] || program.mode}
-          </div>
-          <div
-            className="text-label-sm"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              gridColumn: "1 / -1",
-              color: "var(--on-surface-variant)",
-            }}
-          >
-            <GraduationCap size={14} />
+            <ModeIcon size={11} />
+            {program.mode}
+          </span>
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold font-display bg-surface-low text-on-surface-variant">
+            <GraduationCap size={11} />
             {program.eligibility}
-          </div>
+          </span>
         </div>
 
-        {/* Fee */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-            marginBottom: 18,
-          }}
-        >
-          <IndianRupee size={16} style={{ color: "var(--primary)" }} />
-          <span className="text-headline-sm" style={{ color: "var(--primary)" }}>
+        {/* Fee — prominent */}
+        <div className="flex items-center gap-1.5 mb-5">
+          <IndianRupee size={18} className="text-primary" />
+          <span className="text-2xl font-extrabold font-display text-primary leading-none">
             {program.fee}
           </span>
         </div>
 
         {/* Actions */}
-        <div className="flex gap-sm">
+        <div className="flex gap-3">
           <button
-            className="btn btn--secondary btn--sm"
-            onClick={() => onViewDetails(program.slug)}
-            style={{ flex: 1 }}
-          >
-            view details
-          </button>
-          <button
-            className="btn btn--primary btn--sm"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-bold font-display bg-primary text-on-primary rounded-xl cursor-pointer border-none hover:bg-on-primary-container hover:shadow-md transition-all duration-fast"
             onClick={() => onApplyNow(program)}
-            style={{ flex: 1 }}
           >
             apply now
-            <ArrowRight size={14} />
+            <ArrowRight size={13} />
+          </button>
+          <button
+            className="inline-flex items-center justify-center px-4 py-2.5 text-xs font-bold font-display text-on-surface-variant bg-transparent border border-outline-variant rounded-xl cursor-pointer hover:bg-surface-low hover:text-on-surface transition-all duration-fast"
+            onClick={() => onViewDetails(program.slug)}
+          >
+            details
           </button>
         </div>
       </div>

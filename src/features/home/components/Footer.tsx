@@ -11,57 +11,27 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer
-      style={{
-        background: "var(--surface-container-lowest)",
-        borderTop: "1px solid var(--outline-variant)",
-      }}
-    >
-      <div
-        className="container flex flex--between flex--wrap"
-        style={{
-          padding: "var(--spacing-margin-lg) var(--spacing-container-padding)",
-          gap: "var(--spacing-margin-md)",
-        }}
-      >
-        <div style={{ maxWidth: 360 }}>
+    <footer className="bg-surface-lowest border-t border-outline-variant">
+      <div className="container mx-auto flex flex-col md:flex-row md:items-center md:justify-between px-8 max-w-[var(--container-max)] py-12 gap-6 md:gap-8">
+        <div className="max-w-sm">
           <Link
             href="/"
-            className="text-headline-sm"
-            style={{
-              color: "var(--on-surface)",
-              fontWeight: 700,
-              textDecoration: "none",
-              display: "block",
-              marginBottom: 8,
-            }}
+            className="text-xl font-bold font-display text-on-surface no-underline block mb-2"
           >
             elearn
           </Link>
-          <p className="text-body-sm" style={{ color: "var(--on-surface-variant)" }}>
+          <p className="text-sm text-on-surface-variant">
             Empowering educational institutions through intelligent automation
             and unified technology.
           </p>
         </div>
 
-        <div className="flex flex--wrap" style={{ gap: "16px 32px" }}>
+        <div className="flex flex-wrap gap-4 md:gap-8">
           {footerLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-label-sm"
-              style={{
-                color: "var(--on-surface-variant)",
-                textDecoration: "underline",
-                textDecorationColor: "var(--outline-variant)",
-                transition: "color var(--duration-fast) var(--ease-out)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--primary)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--on-surface-variant)";
-              }}
+              className="text-xs font-bold font-display text-on-surface-variant underline decoration-outline-variant hover:text-primary transition-colors duration-fast"
             >
               {link.label}
             </a>
@@ -69,19 +39,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div
-        className="container"
-        style={{
-          padding: "0 var(--spacing-container-padding) 32px",
-          borderTop: "1px solid var(--outline-variant)",
-          paddingTop: 32,
-          textAlign: "center",
-        }}
-      >
-        <p
-          className="text-label-sm"
-          style={{ color: "var(--on-surface-variant)", opacity: 0.7 }}
-        >
+      <div className="container mx-auto px-8 max-w-[var(--container-max)] border-t border-outline-variant py-8 text-center">
+        <p className="text-xs font-bold font-display text-on-surface-variant opacity-70">
           © {new Date().getFullYear()} elearn. All rights reserved.
         </p>
       </div>

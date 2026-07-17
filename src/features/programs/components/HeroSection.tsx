@@ -1,176 +1,140 @@
 "use client";
 import { motion, easeOut } from "framer-motion";
-import { GraduationCap } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 interface HeroSectionProps {
   onBrowsePrograms: () => void;
   onContactAdmissions: () => void;
 }
 
-const stickerFloat = {
-  hidden: { opacity: 0, scale: 0.6, rotate: 0 },
-  visible: (i: number) => ({
-    opacity: 1,
-    scale: 1,
-    rotate: i === 0 ? 12 : -8,
-    transition: {
-      type: "spring" as const,
-      stiffness: 200,
-      damping: 14,
-      delay: 0.4 + i * 0.15,
-    },
-  }),
-};
+const categories = [
+  { label: "School", color: "var(--color-category-school)" },
+  { label: "Diploma", color: "var(--color-category-diploma)" },
+  { label: "Undergraduate", color: "var(--color-category-undergraduate)" },
+  { label: "Postgraduate", color: "var(--color-category-postgraduate)" },
+  { label: "Professional", color: "var(--color-category-professional)" },
+];
 
 export function HeroSection({
   onBrowsePrograms,
   onContactAdmissions,
 }: HeroSectionProps) {
   return (
-    <section
-      className="section"
-      style={{
-        padding: "80px var(--spacing-container-padding)",
-        position: "relative",
-        overflow: "hidden",
-        background: "var(--surface-container-low)",
-      }}
-    >
-      {/* Sticker decorations */}
-      <motion.div
-        className="badge badge--professional"
-        custom={0}
-        variants={stickerFloat}
-        initial="hidden"
-        animate="visible"
-        style={{
-          position: "absolute",
-          top: 30,
-          right: "10%",
-          transform: "rotate(12deg)",
-          padding: 8,
-        }}
-      >
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-          <rect
-            x="2"
-            y="2"
-            width="36"
-            height="36"
-            rx="8"
-            fill="var(--category-professional)"
-            stroke="var(--on-surface)"
-            strokeWidth="2"
-          />
-          <path
-            d="M14 20L18 24L26 16"
-            stroke="var(--on-surface)"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </motion.div>
-      <motion.div
-        className="badge badge--school"
-        custom={1}
-        variants={stickerFloat}
-        initial="hidden"
-        animate="visible"
-        style={{
-          position: "absolute",
-          bottom: 40,
-          left: "8%",
-          transform: "rotate(-8deg)",
-          padding: 8,
-        }}
-      >
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <path
-            d="M18 0L23 10L34 11L26 19L28 30L18 25L8 30L10 19L2 11L13 10L18 0Z"
-            fill="var(--category-school)"
-            stroke="var(--on-surface)"
-            strokeWidth="2"
-          />
-        </svg>
-      </motion.div>
+    <section className="relative overflow-hidden bg-surface-low">
+      {/* Top color strip */}
+      <div className="flex h-1.5">
+        {categories.map((c) => (
+          <div key={c.label} className="flex-1" style={{ background: c.color }} />
+        ))}
+      </div>
 
-      <div
-        className="container"
-        style={{
-          textAlign: "center",
-          position: "relative",
-        }}
-      >
+      <div className="px-8 pt-16 pb-20 relative">
+        {/* Sticker */}
         <motion.div
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            marginBottom: 20,
-          }}
+          initial={{ opacity: 0, scale: 0, rotate: -12 }}
+          animate={{ opacity: 1, scale: 1, rotate: -12 }}
+          transition={{ type: "spring" as const, stiffness: 200, damping: 14, delay: 0.6 }}
+          className="absolute top-10 right-[12%] hidden lg:block"
         >
-          <span className="badge badge--tertiary">
-            <GraduationCap size={14} />
-            academic year 2025-26 admissions open
-          </span>
+          <div className="bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-2xl font-display font-bold text-sm rotate-6 shadow-md">
+            admissions open 2025-26
+          </div>
         </motion.div>
 
-        <motion.h1
-          className="text-display-lg"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15, ease: easeOut }}
-          style={{
-            fontSize: "clamp(2.5rem, 6vw, 5rem)",
-            margin: "0 auto 16px",
-            maxWidth: 800,
-          }}
-        >
-          explore our
-          <br />
-          <span style={{ color: "var(--primary)" }}>programs</span>
-        </motion.h1>
-
-        <motion.p
-          className="text-body-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3, ease: easeOut }}
-          style={{
-            maxWidth: 580,
-            margin: "0 auto 36px",
-            color: "var(--on-surface-variant)",
-          }}
-        >
-          choose from school, diploma, undergraduate, and professional programs
-          designed to help you achieve your academic and career goals.
-        </motion.p>
-
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.45, ease: easeOut }}
-          className="flex flex--center flex--wrap gap-sm"
+          initial={{ opacity: 0, scale: 0, rotate: 8 }}
+          animate={{ opacity: 1, scale: 1, rotate: 8 }}
+          transition={{ type: "spring" as const, stiffness: 200, damping: 14, delay: 0.75 }}
+          className="absolute bottom-16 right-[22%] hidden lg:block"
         >
-          <button className="btn btn--primary" onClick={onBrowsePrograms}>
-            browse programs →
-          </button>
-          <button
-            className="btn btn--secondary"
-            onClick={onContactAdmissions}
-            style={{
-              background: "var(--primary)",
-              color: "var(--on-primary)",
-              borderColor: "var(--primary)",
-            }}
-          >
-            contact admissions
-          </button>
+          <div className="bg-category-school text-white px-3 py-1.5 rounded-full font-display font-bold text-xs shadow-md">
+            32+ programs
+          </div>
         </motion.div>
+
+        <div className="container mx-auto max-w-[var(--container-max)]">
+          <div className="max-w-3xl">
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, ease: easeOut }}
+              className="flex items-center gap-2 mb-6"
+            >
+              <Sparkles size={16} className="text-primary" />
+              <span className="text-sm font-bold font-display text-on-surface-variant uppercase tracking-wider">
+                academic year 2025-26
+              </span>
+            </motion.div>
+
+            {/* Headline — asymmetric, oversized */}
+            <motion.h1
+              className="text-6xl md:text-8xl font-extrabold font-display text-on-surface leading-[0.9] tracking-tight mb-6"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              explore
+              <br />
+              <span className="text-primary">our programs</span>
+            </motion.h1>
+
+            {/* Subhead */}
+            <motion.p
+              className="text-lg md:text-xl text-on-surface-variant max-w-lg mb-10 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3, ease: easeOut }}
+            >
+              from school to professional certification — find the right program
+              to shape your future.
+            </motion.p>
+
+            {/* Category strip */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.45, ease: easeOut }}
+              className="flex flex-wrap gap-2 mb-10"
+            >
+              {categories.map((c, i) => (
+                <motion.span
+                  key={c.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 + i * 0.07, duration: 0.3 }}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold font-display text-white"
+                  style={{ background: c.color }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                  {c.label}
+                </motion.span>
+              ))}
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.55, ease: easeOut }}
+              className="flex flex-wrap gap-4"
+            >
+              <button
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-on-primary rounded-2xl font-bold text-base font-display cursor-pointer border-none hover:bg-on-primary-container hover:shadow-lg transition-all duration-fast"
+                onClick={onBrowsePrograms}
+              >
+                browse programs
+                <ArrowRight size={18} />
+              </button>
+              <button
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-surface-lowest text-on-surface border-2 border-outline-variant rounded-2xl font-bold text-base font-display cursor-pointer hover:bg-surface-low hover:border-outline transition-all duration-fast"
+                onClick={onContactAdmissions}
+              >
+                talk to admissions
+              </button>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

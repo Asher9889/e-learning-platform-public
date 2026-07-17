@@ -17,92 +17,33 @@ const features = [
 
 export function EducationChange() {
   return (
-    <section className="section">
-      <div
-        className="container"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "var(--spacing-margin-lg)",
-          alignItems: "center",
-        }}
-      >
+    <section className="px-8 py-12">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-[var(--container-max)]">
         {/* Illustration Side */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: easeOut }}
-          style={{
-            background: "var(--surface-container-high)",
-            borderRadius: 32,
-            padding: 48,
-            position: "relative",
-            overflow: "hidden",
-            minHeight: 360,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            border: "1px solid var(--outline-variant)",
-          }}
+          className="bg-surface-container-high rounded-3xl p-12 relative overflow-hidden min-h-[360px] flex items-center justify-center border border-outline-variant"
         >
-          <div style={{ position: "relative", width: "100%", maxWidth: 320 }}>
+          <div className="relative w-full max-w-sm">
             {/* Scattered elements */}
-            <div
-              style={{
-                position: "absolute",
-                top: -40,
-                left: -40,
-                width: 96,
-                height: 96,
-                background: "var(--error-container)",
-                borderRadius: "var(--radius-lg)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                transform: "rotate(12deg)",
-                boxShadow: "var(--shadow-md)",
-              }}
-            >
-              <CloudOff size={32} style={{ color: "var(--error)" }} />
+            <div className="absolute -top-10 -left-10 w-24 h-24 bg-error-container rounded-lg flex items-center justify-center rotate-12 shadow-md">
+              <CloudOff size={32} className="text-error" />
             </div>
-            <div
-              style={{
-                position: "absolute",
-                bottom: -20,
-                right: -20,
-                width: 112,
-                height: 112,
-                background: "var(--surface-variant)",
-                borderRadius: "var(--radius-lg)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                transform: "rotate(-6deg)",
-                boxShadow: "var(--shadow-md)",
-              }}
-            >
-              <FileText size={32} style={{ color: "var(--on-surface-variant)" }} />
+            <div className="absolute -bottom-5 -right-5 w-28 h-28 bg-surface-variant rounded-lg flex items-center justify-center -rotate-6 shadow-md">
+              <FileText size={32} className="text-on-surface-variant" />
             </div>
             {/* Center card */}
-            <div
-              style={{
-                padding: 40,
-                background: "var(--surface-container-lowest)",
-                borderRadius: 24,
-                border: "2px dashed var(--outline-variant)",
-                display: "flex",
-                flexDirection: "column",
-                gap: 16,
-              }}
-            >
-              <div style={{ height: 16, width: "75%", background: "var(--outline-variant)", borderRadius: 4, opacity: 0.3 }} />
-              <div style={{ height: 16, width: "100%", background: "var(--outline-variant)", borderRadius: 4, opacity: 0.3 }} />
-              <div style={{ height: 16, width: "50%", background: "var(--outline-variant)", borderRadius: 4, opacity: 0.3 }} />
-              <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
-                <div style={{ width: 32, height: 32, borderRadius: 8, background: "var(--error-container)" }} />
-                <div style={{ width: 32, height: 32, borderRadius: 8, background: "var(--surface-variant)" }} />
-                <div style={{ width: 32, height: 32, borderRadius: 8, background: "var(--tertiary-container)" }} />
+            <div className="p-10 bg-surface-lowest rounded-3xl border-2 border-dashed border-outline-variant flex flex-col gap-4">
+              <div className="h-4 w-3/4 bg-outline-variant rounded opacity-30" />
+              <div className="h-4 w-full bg-outline-variant rounded opacity-30" />
+              <div className="h-4 w-1/2 bg-outline-variant rounded opacity-30" />
+              <div className="flex gap-2 mt-4">
+                <div className="w-8 h-8 rounded-lg bg-error-container" />
+                <div className="w-8 h-8 rounded-lg bg-surface-variant" />
+                <div className="w-8 h-8 rounded-lg bg-tertiary-container" />
               </div>
             </div>
           </div>
@@ -114,48 +55,30 @@ export function EducationChange() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15, ease: easeOut }}
-          style={{ paddingLeft: "var(--spacing-margin-lg)" }}
+          className="lg:pl-12"
         >
-          <h2 className="text-headline-lg" style={{ marginBottom: 16 }}>
+          <h2 className="text-3xl font-bold font-display text-on-surface mb-4">
             Education is changing.
             <br />
             Your software should too.
           </h2>
-          <p
-            className="text-body-lg"
-            style={{
-              color: "var(--on-surface-variant)",
-              marginBottom: 32,
-            }}
-          >
+          <p className="text-lg text-on-surface-variant mb-8">
             Legacy systems often force administrators to juggle a dozen
             disconnected platforms—attendance software, separate live class
             tools, manual assessment trackers, and clunky reporting sheets.
           </p>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <div className="flex flex-col gap-6">
             {features.map((feat) => (
-              <div key={feat.title} className="flex" style={{ gap: 16 }}>
-                <div
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: "var(--radius-full)",
-                    background: "var(--primary-container)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                    opacity: 0.15,
-                  }}
-                >
-                  <feat.icon size={24} style={{ color: "var(--primary)" }} />
+              <div key={feat.title} className="flex gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center shrink-0 opacity-15">
+                  <feat.icon size={24} className="text-primary" />
                 </div>
                 <div>
-                  <p className="text-label-md" style={{ marginBottom: 4 }}>
+                  <p className="text-sm font-semibold font-display text-on-surface mb-1">
                     {feat.title}
                   </p>
-                  <p className="text-body-sm" style={{ color: "var(--on-surface-variant)" }}>
+                  <p className="text-sm text-on-surface-variant">
                     {feat.desc}
                   </p>
                 </div>

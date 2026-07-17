@@ -10,34 +10,17 @@ const institutions = [
 
 export function TrustBar() {
   return (
-    <section
-      style={{
-        background: "var(--surface-container-low)",
-        padding: "48px 0",
-        borderTop: "1px solid var(--outline-variant)",
-        borderBottom: "1px solid var(--outline-variant)",
-      }}
-    >
-      <div className="container" style={{ textAlign: "center" }}>
-        <p
-          className="text-label-md"
-          style={{
-            color: "var(--on-surface-variant)",
-            marginBottom: 32,
-          }}
-        >
+    <section className="bg-surface-low border-y border-outline-variant py-12">
+      <div className="container mx-auto text-center px-8 max-w-[var(--container-max)]">
+        <p className="text-sm font-semibold font-display text-on-surface-variant mb-8">
           Designed for institutions of every size—from a few hundred learners to
           tens of thousands.
         </p>
-        <div
-          className="flex flex--center flex--wrap"
-          style={{ gap: "24px 48px", opacity: 0.6 }}
-        >
+        <div className="flex flex-wrap items-center justify-center opacity-60 gap-6 md:gap-12">
           {institutions.map((inst) => (
             <span
               key={inst.label}
-              className="text-headline-sm flex"
-              style={{ alignItems: "center", gap: 8, fontWeight: 700 }}
+              className="flex items-center gap-2 text-xl font-semibold font-display text-on-surface"
             >
               <inst.icon size={20} />
               {inst.label}
