@@ -1,6 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap");
+
+
 @import "tailwindcss";
 @import "../src/styles/components.css";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   /* ── Surface System ── */
@@ -48,6 +54,25 @@
   --color-outline: #8d716a;
   --color-outline-variant: #e1bfb8;
 
+  /* ── Shadcn/UI Token Mappings ── */
+  --color-background: #fff8f6;
+  --color-foreground: #261815;
+  --color-card: #ffffff;
+  --color-card-foreground: #261815;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #261815;
+  --color-primary-foreground: #ffffff;
+  --color-secondary-foreground: #ffffff;
+  --color-muted: #fff0ed;
+  --color-muted-foreground: #59413c;
+  --color-accent: #fff0ed;
+  --color-accent-foreground: #261815;
+  --color-destructive: #ba1a1a;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #e1bfb8;
+  --color-input: #e1bfb8;
+  --color-ring: #ae3115;
+
   /* ── Fixed Colors (Semantic Accents) ── */
   --color-primary-fixed: #ffdad2;
   --color-primary-fixed-dim: #ffb4a3;
@@ -58,18 +83,23 @@
   /* ── Category Colors ── */
   --color-category-school: #3b82f6;
   --color-category-school-bg: #eff6ff;
+  --color-category-school-text: #ffffff;
   --color-category-school-gradient-end: #1d4ed8;
   --color-category-diploma: #22c55e;
   --color-category-diploma-bg: #f0fdf4;
+  --color-category-diploma-text: #ffffff;
   --color-category-diploma-gradient-end: #15803d;
   --color-category-undergraduate: #a855f7;
   --color-category-undergraduate-bg: #faf5ff;
+  --color-category-undergraduate-text: #ffffff;
   --color-category-undergraduate-gradient-end: #7c3aed;
   --color-category-postgraduate: #f97316;
   --color-category-postgraduate-bg: #fff7ed;
+  --color-category-postgraduate-text: #ffffff;
   --color-category-postgraduate-gradient-end: #ea580c;
   --color-category-professional: #e11d48;
   --color-category-professional-bg: #fff1f2;
+  --color-category-professional-text: #ffffff;
   --color-category-professional-gradient-end: #be123c;
 
   /* ── Fonts ── */
