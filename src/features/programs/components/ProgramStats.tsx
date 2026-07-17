@@ -36,120 +36,109 @@ const container = {
 
 const item = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut },
+  },
 };
 
 const countUp = {
   hidden: { opacity: 0, scale: 0.5 },
-  visible: { opacity: 1, scale: 1, transition: { type: "spring" as const, stiffness: 120, damping: 12, delay: 0.2 } },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: "spring" as const, stiffness: 120, damping: 12, delay: 0.2 },
+  },
 };
 
 export function ProgramStats() {
   return (
-    <section className="superr" style={{ padding: "0 24px 64px" }}>
+    <section className="section">
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-40px" }}
         variants={container}
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-          gap: 20,
-          position: "relative",
-        }}
+        className="container grid grid--auto"
+        style={{ gap: 20, position: "relative" }}
       >
         {/* Sticker */}
         <motion.div
-          className="sticker"
+          className="badge badge--diploma"
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ type: "spring" as const, stiffness: 200, damping: 14, delay: 0.3 }}
+          transition={{
+            type: "spring" as const,
+            stiffness: 200,
+            damping: 14,
+            delay: 0.3,
+          }}
           style={{
             position: "absolute",
             top: -20,
             right: "10%",
             transform: "rotate(15deg)",
+            padding: 8,
           }}
         >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <circle cx="14" cy="14" r="12" fill="#22c55e" stroke="#171717" strokeWidth="2" />
+            <circle
+              cx="14"
+              cy="14"
+              r="12"
+              fill="var(--category-diploma)"
+              stroke="var(--on-surface)"
+              strokeWidth="2"
+            />
           </svg>
         </motion.div>
 
         {stats.map((s) => (
           <motion.div key={s.label} variants={item}>
             <div
-              className="product-card"
+              className="card"
               style={{
                 padding: 28,
                 textAlign: "center",
-                transition: "transform 0.25s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-3px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "";
+                cursor: "default",
               }}
             >
               <div
                 style={{
                   width: 44,
                   height: 44,
-                  borderRadius: 12,
-                  border: "1.5px solid var(--color-charcoal)",
+                  borderRadius: "var(--radius-md)",
+                  border: "1px solid var(--outline-variant)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   margin: "0 auto 14px",
                 }}
               >
-                <s.icon size={20} style={{ color: "var(--color-marker-orange)" }} />
+                <s.icon size={20} style={{ color: "var(--primary)" }} />
               </div>
               <motion.div
                 variants={countUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
+                className="text-headline-lg"
                 style={{
-                  fontFamily: "var(--font-gelica)",
-                  fontSize: 32,
-                  fontWeight: 400,
-                  color: "var(--color-cocoa-ink)",
-                  lineHeight: 1.08,
+                  color: "var(--on-surface)",
                   marginBottom: 4,
-                  textTransform: "lowercase",
                 }}
               >
                 {s.value}
               </motion.div>
               <div
-                style={{
-                  fontFamily: "var(--font-geist)",
-                  fontSize: 14,
-                  fontWeight: 500,
-                  color: "var(--color-charcoal)",
-                  textTransform: "lowercase",
-                  marginBottom: 2,
-                }}
+                className="text-label-md text-muted"
+                style={{ marginBottom: 2 }}
               >
                 {s.label}
               </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-geist)",
-                  fontSize: 12,
-                  color: "var(--color-charcoal)",
-                  opacity: 0.6,
-                  textTransform: "lowercase",
-                }}
-              >
-                {s.desc}
-              </div>
+              <div className="text-body-sm text-muted">{s.desc}</div>
             </div>
           </motion.div>
         ))}

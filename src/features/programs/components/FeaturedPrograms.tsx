@@ -10,19 +10,22 @@ interface FeaturedProgramsProps {
 }
 
 const categoryColors: Record<string, string> = {
-  School: "#3b82f6",
-  Diploma: "#22c55e",
-  Undergraduate: "#a855f7",
-  Postgraduate: "#f97316",
-  Professional: "#e11d48",
+  School: "var(--category-school)",
+  Diploma: "var(--category-diploma)",
+  Undergraduate: "var(--category-undergraduate)",
+  Postgraduate: "var(--category-postgraduate)",
+  Professional: "var(--category-professional)",
 };
 
 const categoryGradients: Record<string, string> = {
-  School: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
-  Diploma: "linear-gradient(135deg, #22c55e 0%, #15803d 100%)",
-  Undergraduate: "linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)",
-  Postgraduate: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-  Professional: "linear-gradient(135deg, #e11d48 0%, #be123c 100%)",
+  School: "linear-gradient(135deg, var(--category-school) 0%, #1d4ed8 100%)",
+  Diploma: "linear-gradient(135deg, var(--category-diploma) 0%, #15803d 100%)",
+  Undergraduate:
+    "linear-gradient(135deg, var(--category-undergraduate) 0%, #7c3aed 100%)",
+  Postgraduate:
+    "linear-gradient(135deg, var(--category-postgraduate) 0%, #ea580c 100%)",
+  Professional:
+    "linear-gradient(135deg, var(--category-professional) 0%, #be123c 100%)",
 };
 
 const container = {
@@ -32,7 +35,11 @@ const container = {
 
 const cardItem = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut },
+  },
 };
 
 export function FeaturedPrograms({
@@ -43,50 +50,35 @@ export function FeaturedPrograms({
   if (programs.length === 0) return null;
 
   return (
-    <section className="superr" style={{ padding: "0 24px 64px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+    <section className="section">
+      <div className="container">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease: easeOut }}
-          style={{ marginBottom: 32, position: "relative" }}
+          style={{ marginBottom: 32 }}
         >
           <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              marginBottom: 4,
-            }}
+            className="flex flex--center"
+            style={{ gap: 8, marginBottom: 4 }}
           >
             <Star
               size={18}
               style={{
-                fill: "var(--color-marker-orange)",
-                color: "var(--color-marker-orange)",
+                fill: "var(--primary)",
+                color: "var(--primary)",
               }}
             />
             <h2
-              className="display-headline"
-              style={{
-                fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-                margin: 0,
-                textTransform: "lowercase",
-              }}
+              className="text-headline-lg"
+              style={{ margin: 0 }}
             >
               featured programs
             </h2>
           </div>
-          <p
-            style={{
-              fontFamily: "var(--font-geist)",
-              fontSize: 14,
-              color: "var(--color-charcoal)",
-              textTransform: "lowercase",
-            }}
-          >
+          <p className="text-body-sm text-muted">
             most popular programs among students.
           </p>
         </motion.div>
@@ -97,54 +89,36 @@ export function FeaturedPrograms({
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
           variants={container}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-            gap: 16,
-          }}
+          className="grid grid--auto"
+          style={{ gap: 16 }}
         >
           {programs.slice(0, 4).map((program) => (
             <motion.div
               key={program.id}
               variants={cardItem}
-              className="product-card"
+              className="card"
               style={{
                 padding: 24,
-                transition: "transform 0.25s ease",
                 cursor: "default",
-                position: "relative",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "";
               }}
             >
               {/* Category badge */}
-              <div
+              <span
+                className="badge"
                 style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  padding: "2px 10px",
-                  borderRadius: "var(--radius-tags)",
-                  fontFamily: "var(--font-geist)",
-                  fontSize: 11,
-                  fontWeight: 500,
                   color: "#fff",
                   background: categoryColors[program.category] || "#666",
-                  textTransform: "lowercase",
                   marginBottom: 12,
                 }}
               >
                 {program.category}
-              </div>
+              </span>
 
               {/* Thumbnail */}
               <div
                 style={{
                   aspectRatio: "16/9",
-                  borderRadius: "var(--radius-cards)",
+                  borderRadius: "var(--radius-lg)",
                   overflow: "hidden",
                   background: categoryGradients[program.category],
                   display: "flex",
@@ -153,18 +127,16 @@ export function FeaturedPrograms({
                   marginBottom: 14,
                 }}
               >
-                <GraduationCap size={32} style={{ color: "#fff", opacity: 0.3 }} />
+                <GraduationCap
+                  size={32}
+                  style={{ color: "#fff", opacity: 0.3 }}
+                />
               </div>
 
               <h3
+                className="text-headline-sm"
                 style={{
-                  fontFamily: "var(--font-gelica)",
-                  fontSize: 18,
-                  fontWeight: 400,
-                  color: "var(--color-cocoa-ink)",
                   marginBottom: 8,
-                  textTransform: "lowercase",
-                  lineHeight: 1.25,
                   display: "-webkit-box",
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: "vertical",
@@ -175,82 +147,45 @@ export function FeaturedPrograms({
               </h3>
 
               <p
+                className="text-body-sm text-muted"
                 style={{
-                  fontFamily: "var(--font-geist)",
-                  fontSize: 12,
-                  lineHeight: 1.5,
-                  color: "var(--color-charcoal)",
                   marginBottom: 14,
                   display: "-webkit-box",
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: "vertical",
                   overflow: "hidden",
-                  opacity: 0.7,
                 }}
               >
                 {program.description}
               </p>
 
               <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginBottom: 16,
-                }}
+                className="flex flex--between"
+                style={{ marginBottom: 16 }}
               >
                 <span
-                  style={{
-                    fontFamily: "var(--font-gelica)",
-                    fontSize: 18,
-                    color: "var(--color-marker-orange)",
-                    textTransform: "lowercase",
-                  }}
+                  className="text-headline-sm"
+                  style={{ color: "var(--primary)" }}
                 >
                   {program.fee}
                 </span>
-                <span
-                  style={{
-                    fontFamily: "var(--font-geist)",
-                    fontSize: 11,
-                    color: "var(--color-charcoal)",
-                    opacity: 0.6,
-                    textTransform: "lowercase",
-                  }}
-                >
+                <span className="text-body-sm text-muted">
                   {program.duration}
                 </span>
               </div>
 
-              <div style={{ display: "flex", gap: 8 }}>
+              <div className="flex gap-sm">
                 <button
-                  className="pill-btn"
+                  className="btn btn--secondary btn--sm"
                   onClick={() => onViewDetails(program.slug)}
-                  style={{
-                    flex: 1,
-                    padding: "6px 12px",
-                    fontSize: 12,
-                    fontFamily: "var(--font-gelica)",
-                  }}
+                  style={{ flex: 1 }}
                 >
                   details
                 </button>
                 <button
-                  className="pill-btn"
+                  className="btn btn--primary btn--sm"
                   onClick={() => onApplyNow(program)}
-                  style={{
-                    flex: 1,
-                    padding: "6px 12px",
-                    fontSize: 12,
-                    fontFamily: "var(--font-gelica)",
-                    background: "var(--color-marker-orange)",
-                    color: "#fff",
-                    borderColor: "var(--color-marker-orange)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 4,
-                  }}
+                  style={{ flex: 1 }}
                 >
                   apply
                   <ArrowRight size={12} />

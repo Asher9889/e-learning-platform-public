@@ -9,37 +9,29 @@ interface ProgramCardProps {
 }
 
 const categoryGradients: Record<string, string> = {
-  School: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
-  Diploma: "linear-gradient(135deg, #22c55e 0%, #15803d 100%)",
-  Undergraduate: "linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)",
-  Postgraduate: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-  Professional: "linear-gradient(135deg, #e11d48 0%, #be123c 100%)",
+  School: "linear-gradient(135deg, var(--category-school) 0%, #1d4ed8 100%)",
+  Diploma: "linear-gradient(135deg, var(--category-diploma) 0%, #15803d 100%)",
+  Undergraduate:
+    "linear-gradient(135deg, var(--category-undergraduate) 0%, #7c3aed 100%)",
+  Postgraduate:
+    "linear-gradient(135deg, var(--category-postgraduate) 0%, #ea580c 100%)",
+  Professional:
+    "linear-gradient(135deg, var(--category-professional) 0%, #be123c 100%)",
 };
 
 const modeLabels: Record<string, string> = {
-  Online: "🌐 online",
-  Offline: "🏫 offline",
-  Hybrid: "🔄 hybrid",
+  Online: "online",
+  Offline: "offline",
+  Hybrid: "hybrid",
 };
 
-export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardProps) {
+export function ProgramCard({
+  program,
+  onViewDetails,
+  onApplyNow,
+}: ProgramCardProps) {
   return (
-    <div
-      className="product-card"
-      style={{
-        padding: 0,
-        overflow: "hidden",
-        transition: "transform 0.25s ease, box-shadow 0.25s ease",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-4px)";
-        e.currentTarget.style.boxShadow = "rgba(0, 0, 0, 0.1) 0px 8px 32px 0px";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "";
-        e.currentTarget.style.boxShadow = "var(--shadow-lg)";
-      }}
-    >
+    <div className="card" style={{ padding: 0, overflow: "hidden" }}>
       {/* Thumbnail */}
       <div
         style={{
@@ -60,16 +52,19 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
             style={{ objectFit: "cover" }}
           />
         ) : (
-          <div style={{ textAlign: "center", color: "#fff", opacity: 0.3 }}>
+          <div
+            style={{
+              textAlign: "center",
+              color: "#fff",
+              opacity: 0.3,
+            }}
+          >
             <GraduationCap size={40} style={{ margin: "0 auto 8px" }} />
             <span
+              className="text-label-sm"
               style={{
-                fontFamily: "var(--font-geist)",
-                fontSize: 12,
-                fontWeight: 500,
-                textTransform: "lowercase",
-                letterSpacing: "0.05em",
                 color: "#fff",
+                letterSpacing: "0.05em",
               }}
             >
               {program.name}
@@ -78,21 +73,14 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
         )}
         {/* Category badge */}
         <div
+          className="badge"
           style={{
             position: "absolute",
             left: 12,
             top: 12,
-            display: "inline-flex",
-            alignItems: "center",
-            padding: "2px 10px",
-            borderRadius: "var(--radius-tags)",
-            fontFamily: "var(--font-geist)",
-            fontSize: 11,
-            fontWeight: 500,
             color: "#fff",
             background: "rgba(0,0,0,0.3)",
             backdropFilter: "blur(4px)",
-            textTransform: "lowercase",
           }}
         >
           {program.category}
@@ -100,16 +88,11 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
       </div>
 
       {/* Content */}
-      <div style={{ padding: 24 }}>
+      <div className="card__body">
         <h3
+          className="text-headline-sm"
           style={{
-            fontFamily: "var(--font-gelica)",
-            fontSize: 20,
-            fontWeight: 400,
-            color: "var(--color-cocoa-ink)",
             marginBottom: 8,
-            textTransform: "lowercase",
-            lineHeight: 1.25,
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
@@ -120,13 +103,9 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
         </h3>
 
         <p
+          className="text-body-sm text-muted"
           style={{
-            fontFamily: "var(--font-geist)",
-            fontSize: 13,
-            lineHeight: 1.5,
-            color: "var(--color-charcoal)",
             marginBottom: 18,
-            opacity: 0.7,
             display: "-webkit-box",
             WebkitLineClamp: 3,
             WebkitBoxOrient: "vertical",
@@ -141,50 +120,44 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: "8px",
+            gap: 8,
             marginBottom: 14,
           }}
         >
           <div
+            className="text-label-sm"
             style={{
               display: "flex",
               alignItems: "center",
               gap: 6,
-              fontFamily: "var(--font-geist)",
-              fontSize: 12,
-              color: "var(--color-charcoal)",
-              textTransform: "lowercase",
+              color: "var(--on-surface-variant)",
             }}
           >
-            <Clock size={14} style={{ opacity: 0.5 }} />
+            <Clock size={14} />
             {program.duration}
           </div>
           <div
+            className="text-label-sm"
             style={{
               display: "flex",
               alignItems: "center",
               gap: 6,
-              fontFamily: "var(--font-geist)",
-              fontSize: 12,
-              color: "var(--color-charcoal)",
-              textTransform: "lowercase",
+              color: "var(--on-surface-variant)",
             }}
           >
             {modeLabels[program.mode] || program.mode}
           </div>
           <div
+            className="text-label-sm"
             style={{
               display: "flex",
               alignItems: "center",
               gap: 6,
-              fontFamily: "var(--font-geist)",
-              fontSize: 12,
-              color: "var(--color-charcoal)",
               gridColumn: "1 / -1",
-              textTransform: "lowercase",
+              color: "var(--on-surface-variant)",
             }}
           >
-            <GraduationCap size={14} style={{ opacity: 0.5 }} />
+            <GraduationCap size={14} />
             {program.eligibility}
           </div>
         </div>
@@ -198,52 +171,25 @@ export function ProgramCard({ program, onViewDetails, onApplyNow }: ProgramCardP
             marginBottom: 18,
           }}
         >
-          <IndianRupee
-            size={16}
-            style={{ color: "var(--color-marker-orange)" }}
-          />
-          <span
-            style={{
-              fontFamily: "var(--font-gelica)",
-              fontSize: 22,
-              color: "var(--color-marker-orange)",
-              textTransform: "lowercase",
-            }}
-          >
+          <IndianRupee size={16} style={{ color: "var(--primary)" }} />
+          <span className="text-headline-sm" style={{ color: "var(--primary)" }}>
             {program.fee}
           </span>
         </div>
 
         {/* Actions */}
-        <div style={{ display: "flex", gap: 8 }}>
+        <div className="flex gap-sm">
           <button
-            className="pill-btn"
+            className="btn btn--secondary btn--sm"
             onClick={() => onViewDetails(program.slug)}
-            style={{
-              flex: 1,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontFamily: "var(--font-gelica)",
-            }}
+            style={{ flex: 1 }}
           >
             view details
           </button>
           <button
-            className="pill-btn"
+            className="btn btn--primary btn--sm"
             onClick={() => onApplyNow(program)}
-            style={{
-              flex: 1,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontFamily: "var(--font-gelica)",
-              background: "var(--color-marker-orange)",
-              color: "#fff",
-              borderColor: "var(--color-marker-orange)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 4,
-            }}
+            style={{ flex: 1 }}
           >
             apply now
             <ArrowRight size={14} />

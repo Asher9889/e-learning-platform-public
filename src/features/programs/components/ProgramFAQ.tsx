@@ -38,7 +38,11 @@ const container = {
 
 const faqItem = {
   hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: easeOut } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: easeOut },
+  },
 };
 
 export function ProgramFAQ() {
@@ -46,11 +50,8 @@ export function ProgramFAQ() {
 
   return (
     <section
-      className="superr"
-      style={{
-        padding: "0 24px 64px",
-        background: "var(--color-dew-drop)",
-      }}
+      className="section"
+      style={{ background: "var(--surface-container-low)" }}
     >
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
         {/* Section Header */}
@@ -62,25 +63,14 @@ export function ProgramFAQ() {
           style={{ marginBottom: 36, textAlign: "center" }}
         >
           <h2
-            className="display-headline"
-            style={{
-              fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-              margin: "0 0 6px",
-              textTransform: "lowercase",
-            }}
+            className="text-headline-lg"
+            style={{ margin: "0 0 6px" }}
           >
             frequently asked questions
           </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-geist)",
-              fontSize: 14,
-              color: "var(--color-charcoal)",
-              opacity: 0.6,
-              textTransform: "lowercase",
-            }}
-          >
-            everything you need to know about our programs and admission process.
+          <p className="text-body-sm text-muted">
+            everything you need to know about our programs and admission
+            process.
           </p>
         </motion.div>
 
@@ -98,38 +88,22 @@ export function ProgramFAQ() {
               <motion.div
                 key={index}
                 variants={faqItem}
-                className="product-card"
-                style={{
-                  padding: 0,
-                  overflow: "hidden",
-                  cursor: "pointer",
-                }}
+                className="card accordion-item"
+                style={{ padding: 0, overflow: "hidden" }}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "18px 24px",
-                    gap: 12,
-                  }}
-                >
+                <div className="accordion-item__header">
                   <span
-                    style={{
-                      fontFamily: "var(--font-gelica)",
-                      fontSize: 16,
-                      color: "var(--color-cocoa-ink)",
-                      textTransform: "lowercase",
-                    }}
+                    className="text-headline-sm"
+                    style={{ color: "var(--on-surface)" }}
                   >
                     {faq.question}
                   </span>
                   <ChevronDown
                     size={18}
                     style={{
-                      color: "var(--color-marker-orange)",
-                      transition: "transform 0.3s ease",
+                      color: "var(--primary)",
+                      transition: "transform var(--duration-normal) var(--ease-out)",
                       transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
                       flexShrink: 0,
                     }}
@@ -144,17 +118,7 @@ export function ProgramFAQ() {
                   transition={{ duration: 0.3, ease: easeOut }}
                   style={{ overflow: "hidden" }}
                 >
-                  <div
-                    style={{
-                      padding: "0 24px 18px",
-                      fontFamily: "var(--font-geist)",
-                      fontSize: 13,
-                      lineHeight: 1.6,
-                      color: "var(--color-charcoal)",
-                      opacity: 0.7,
-                      textTransform: "lowercase",
-                    }}
-                  >
+                  <div className="accordion-item__content text-body-sm text-muted">
                     {faq.answer}
                   </div>
                 </motion.div>

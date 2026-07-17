@@ -7,113 +7,134 @@ interface CTASectionProps {
   onContactAdmissions: () => void;
 }
 
-export function CTASection({ onApplyNow, onContactAdmissions }: CTASectionProps) {
+export function CTASection({
+  onApplyNow,
+  onContactAdmissions,
+}: CTASectionProps) {
   return (
-    <section className="superr" style={{ padding: "0 24px 80px" }}>
+    <section className="section" style={{ paddingBottom: 80 }}>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.6, ease: easeOut }}
-        style={{ maxWidth: 1200, margin: "0 auto" }}
+        className="container"
       >
         <div
-          className="product-card"
+          className="card"
           style={{
             padding: "56px 40px",
             textAlign: "center",
             position: "relative",
             overflow: "hidden",
-            background: "var(--color-dew-drop)",
+            background: "var(--surface-container-low)",
+            cursor: "default",
           }}
         >
           {/* Sticker decorations */}
           <motion.div
-            className="sticker"
+            className="badge badge--school"
             initial={{ opacity: 0, scale: 0, rotate: -8 }}
             whileInView={{ opacity: 1, scale: 1, rotate: -8 }}
             viewport={{ once: true }}
-            transition={{ type: "spring" as const, stiffness: 200, damping: 14, delay: 0.3 }}
+            transition={{
+              type: "spring" as const,
+              stiffness: 200,
+              damping: 14,
+              delay: 0.3,
+            }}
             style={{
               position: "absolute",
               top: 20,
               left: 20,
+              padding: 8,
             }}
           >
             <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-              <circle cx="18" cy="18" r="16" fill="#3b82f6" stroke="#171717" strokeWidth="2" />
-              <path d="M12 18L16 22L24 14" stroke="#171717" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              <circle
+                cx="18"
+                cy="18"
+                r="16"
+                fill="var(--category-school)"
+                stroke="var(--on-surface)"
+                strokeWidth="2"
+              />
+              <path
+                d="M12 18L16 22L24 14"
+                stroke="var(--on-surface)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </motion.div>
           <motion.div
-            className="sticker"
+            className="badge badge--professional"
             initial={{ opacity: 0, scale: 0, rotate: 12 }}
             whileInView={{ opacity: 1, scale: 1, rotate: 12 }}
             viewport={{ once: true }}
-            transition={{ type: "spring" as const, stiffness: 200, damping: 14, delay: 0.45 }}
+            transition={{
+              type: "spring" as const,
+              stiffness: 200,
+              damping: 14,
+              delay: 0.45,
+            }}
             style={{
               position: "absolute",
               bottom: 20,
               right: 20,
+              padding: 8,
             }}
           >
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <rect x="2" y="2" width="28" height="28" rx="6" fill="#ff66cf" stroke="#171717" strokeWidth="2" />
-              <path d="M16 8V24M8 16H24" stroke="#171717" strokeWidth="2.5" strokeLinecap="round" />
+              <rect
+                x="2"
+                y="2"
+                width="28"
+                height="28"
+                rx="6"
+                fill="var(--category-professional)"
+                stroke="var(--on-surface)"
+                strokeWidth="2"
+              />
+              <path
+                d="M16 8V24M8 16H24"
+                stroke="var(--on-surface)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
             </svg>
           </motion.div>
 
           <h2
-            className="display-headline"
+            className="text-headline-lg"
             style={{
-              fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)",
               margin: "0 auto 12px",
               maxWidth: 600,
-              textTransform: "lowercase",
             }}
           >
             ready to start your learning journey?
           </h2>
           <p
+            className="text-body-md text-muted"
             style={{
-              fontFamily: "var(--font-geist)",
-              fontSize: 16,
-              lineHeight: 1.6,
-              color: "var(--color-charcoal)",
               maxWidth: 500,
               margin: "0 auto 28px",
-              textTransform: "lowercase",
             }}
           >
             apply today and take the next step toward your academic and
             professional success.
           </p>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 16,
-              flexWrap: "wrap",
-            }}
-          >
+          <div className="flex flex--center flex--wrap gap-sm">
             <button
-              className="pill-btn"
+              className="btn btn--primary"
               onClick={onApplyNow}
-              style={{
-                background: "var(--color-marker-orange)",
-                color: "#fff",
-                borderColor: "var(--color-marker-orange)",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-              }}
             >
               apply now
               <ArrowRight size={16} />
             </button>
             <button
-              className="pill-btn"
+              className="btn btn--secondary"
               onClick={onContactAdmissions}
             >
               contact admissions

@@ -19,84 +19,37 @@ const container = {
 
 const cardItem = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut },
+  },
 };
 
 function SkeletonCard() {
   return (
-    <div
-      className="product-card"
-      style={{
-        padding: 0,
-        overflow: "hidden",
-        background: "var(--surface-canvas)",
-      }}
-    >
-      <div
-        style={{
-          aspectRatio: "16/9",
-          background: "var(--color-dew-drop)",
-        }}
-      />
+    <div className="card" style={{ padding: 0, overflow: "hidden" }}>
+      <div className="skeleton" style={{ aspectRatio: "16/9" }} />
       <div style={{ padding: 24 }}>
         <div
-          style={{
-            height: 20,
-            width: "70%",
-            background: "var(--color-dew-drop)",
-            borderRadius: 4,
-            marginBottom: 12,
-          }}
+          className="skeleton"
+          style={{ height: 20, width: "70%", marginBottom: 12 }}
         />
         <div
-          style={{
-            height: 12,
-            width: "100%",
-            background: "var(--color-dew-drop)",
-            borderRadius: 4,
-            marginBottom: 6,
-          }}
+          className="skeleton"
+          style={{ height: 12, width: "100%", marginBottom: 6 }}
         />
         <div
-          style={{
-            height: 12,
-            width: "80%",
-            background: "var(--color-dew-drop)",
-            borderRadius: 4,
-            marginBottom: 18,
-          }}
+          className="skeleton"
+          style={{ height: 12, width: "80%", marginBottom: 18 }}
         />
         <div
-          style={{
-            height: 14,
-            width: "40%",
-            background: "var(--color-dew-drop)",
-            borderRadius: 4,
-            marginBottom: 18,
-          }}
+          className="skeleton"
+          style={{ height: 14, width: "40%", marginBottom: 18 }}
         />
-        <div
-          style={{
-            display: "flex",
-            gap: 8,
-          }}
-        >
-          <div
-            style={{
-              flex: 1,
-              height: 36,
-              background: "var(--color-dew-drop)",
-              borderRadius: "var(--radius-buttons)",
-            }}
-          />
-          <div
-            style={{
-              flex: 1,
-              height: 36,
-              background: "var(--color-dew-drop)",
-              borderRadius: "var(--radius-buttons)",
-            }}
-          />
+        <div className="flex gap-sm">
+          <div className="skeleton" style={{ flex: 1, height: 36 }} />
+          <div className="skeleton" style={{ flex: 1, height: 36 }} />
         </div>
       </div>
     </div>
@@ -112,19 +65,11 @@ export function ProgramGrid({
 }: ProgramGridProps) {
   if (isLoading) {
     return (
-      <section className="superr" style={{ padding: "0 24px 64px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-              gap: 20,
-            }}
-          >
-            {Array.from({ length: 6 }).map((_, i) => (
-              <SkeletonCard key={i} />
-            ))}
-          </div>
+      <section className="section">
+        <div className="container grid grid--auto" style={{ gap: 20 }}>
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
         </div>
       </section>
     );
@@ -135,35 +80,24 @@ export function ProgramGrid({
   }
 
   return (
-    <section className="superr" style={{ padding: "0 24px 64px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+    <section className="section">
+      <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease: easeOut }}
-          style={{ marginBottom: 28, position: "relative" }}
+          style={{ marginBottom: 28 }}
         >
           <h2
-            className="display-headline"
-            style={{
-              fontSize: "clamp(1.4rem, 2.5vw, 1.8rem)",
-              margin: "0 0 4px",
-              textTransform: "lowercase",
-            }}
+            className="text-headline-lg"
+            style={{ margin: "0 0 4px" }}
           >
             all programs
           </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-geist)",
-              fontSize: 13,
-              color: "var(--color-charcoal)",
-              opacity: 0.6,
-              textTransform: "lowercase",
-            }}
-          >
-            showing {programs.length} program{programs.length !== 1 ? "s" : ""}
+          <p className="text-body-sm text-muted">
+            showing {programs.length} program
+            {programs.length !== 1 ? "s" : ""}
           </p>
         </motion.div>
         <motion.div
@@ -171,11 +105,8 @@ export function ProgramGrid({
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
           variants={container}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-            gap: 20,
-          }}
+          className="grid grid--auto"
+          style={{ gap: 20 }}
         >
           {programs.map((program) => (
             <motion.div key={program.id} variants={cardItem}>

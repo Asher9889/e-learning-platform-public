@@ -19,13 +19,7 @@ const durations = [
   "4 Years",
 ];
 
-const sortOptions = [
-  "Newest",
-  "Popular",
-  "Lowest Fee",
-  "Highest Fee",
-  "A-Z",
-];
+const sortOptions = ["Newest", "Popular", "Lowest Fee", "Highest Fee", "A-Z"];
 
 interface ProgramFiltersProps {
   searchQuery: string;
@@ -39,19 +33,6 @@ interface ProgramFiltersProps {
   onReset: () => void;
 }
 
-const controlBase: React.CSSProperties = {
-  fontFamily: "var(--font-geist)",
-  fontSize: 13,
-  border: "1.5px solid var(--color-charcoal)",
-  borderRadius: "var(--radius-inputs)",
-  background: "var(--surface-canvas)",
-  color: "var(--color-charcoal)",
-  textTransform: "lowercase",
-  outline: "none",
-  height: 38,
-  boxSizing: "border-box",
-};
-
 export function ProgramFilters({
   searchQuery,
   onSearchChange,
@@ -64,29 +45,13 @@ export function ProgramFilters({
   onReset,
 }: ProgramFiltersProps) {
   return (
-    <div
-      className="superr program-filters"
-      style={{
-        position: "sticky",
-        top: 64,
-        zIndex: 30,
-        borderBottom: "1px solid var(--color-charcoal)",
-        background: "var(--surface-canvas)",
-      }}
-    >
+    <div className="sticky-bar">
       <div
-        className="program-filters-inner"
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "10px 24px",
-          display: "flex",
-          alignItems: "center",
-          gap: 10,
-        }}
+        className="container flex flex--center"
+        style={{ padding: "10px var(--spacing-container-padding)", gap: 10 }}
       >
         {/* Search */}
-        <div className="program-filters-search" style={{ position: "relative", flex: "0 1 260px" }}>
+        <div style={{ position: "relative", flex: "0 1 260px" }}>
           <Search
             size={14}
             style={{
@@ -94,27 +59,24 @@ export function ProgramFilters({
               left: 10,
               top: "50%",
               transform: "translateY(-50%)",
-              color: "var(--color-charcoal)",
-              opacity: 0.5,
+              color: "var(--on-surface-variant)",
             }}
           />
           <input
+            className="input input--search"
             placeholder="search programs..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            style={{
-              ...controlBase,
-              width: "100%",
-              padding: "6px 10px 6px 30px",
-            }}
+            style={{ width: "100%" }}
           />
         </div>
 
         {/* Category */}
         <select
+          className="select"
           value={categoryFilter}
           onChange={(e) => onCategoryChange(e.target.value)}
-          style={{ ...controlBase, flex: "0 0 auto", padding: "6px 10px", maxWidth: 160 }}
+          style={{ flex: "0 0 auto", maxWidth: 160 }}
         >
           {programTypes.map((t) => (
             <option key={t} value={t}>
@@ -125,9 +87,10 @@ export function ProgramFilters({
 
         {/* Duration */}
         <select
+          className="select"
           value={durationFilter}
           onChange={(e) => onDurationChange(e.target.value)}
-          style={{ ...controlBase, flex: "0 0 auto", padding: "6px 10px", maxWidth: 110 }}
+          style={{ flex: "0 0 auto", maxWidth: 110 }}
         >
           {durations.map((d) => (
             <option key={d} value={d}>
@@ -138,9 +101,10 @@ export function ProgramFilters({
 
         {/* Sort */}
         <select
+          className="select"
           value={sortBy}
           onChange={(e) => onSortChange(e.target.value)}
-          style={{ ...controlBase, flex: "0 0 auto", padding: "6px 10px", maxWidth: 120 }}
+          style={{ flex: "0 0 auto", maxWidth: 120 }}
         >
           {sortOptions.map((o) => (
             <option key={o} value={o}>
@@ -151,17 +115,8 @@ export function ProgramFilters({
 
         {/* Reset */}
         <button
-          className="pill-btn"
+          className="btn btn--secondary btn--icon"
           onClick={onReset}
-          style={{
-            width: 38,
-            height: 38,
-            padding: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
-          }}
           title="Reset Filters"
         >
           <RotateCcw size={15} />

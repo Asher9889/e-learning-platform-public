@@ -61,10 +61,7 @@ export default function ProgramsPage() {
   }, []);
 
   return (
-    <div
-      className="superr"
-      style={{ minHeight: "100vh", overflowX: "hidden" }}
-    >
+    <div style={{ minHeight: "100vh", overflowX: "hidden" }}>
       <HeroSection
         onBrowsePrograms={handleBrowsePrograms}
         onContactAdmissions={handleContactAdmissions}
