@@ -1,9 +1,5 @@
-const Home = () => {
-    return (
-        <div>
-            I am an home page.
-        </div>
-    );
-}
+import HomePage from "@/src/features/home/pages/HomePage";
 
-export default Home;
+export default function HomeRoute() {
+  return <HomePage />;
+}

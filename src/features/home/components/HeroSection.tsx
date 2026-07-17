@@ -1,220 +1,274 @@
 "use client";
+import { motion, easeOut } from "framer-motion";
+import { ArrowRight, GraduationCap, BarChart3, Calendar } from "lucide-react";
 
-interface HeroSectionProps {
-  scrollTo?: (id: string) => void;
-}
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.15, ease: easeOut },
+  }),
+};
 
-export function HeroSection({ scrollTo }: HeroSectionProps) {
+const floatAnim = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 15,
+      delay: 0.3 + i * 0.2,
+    },
+  }),
+};
+
+export function HeroSection() {
   return (
     <section
       className="section"
       style={{
-        padding: "80px var(--spacing-container-padding) 64px",
+        minHeight: "90vh",
+        display: "flex",
+        alignItems: "center",
+        paddingTop: 120,
         position: "relative",
         overflow: "hidden",
+        background:
+          "linear-gradient(180deg, var(--surface) 0%, var(--surface-container-low) 100%)",
       }}
     >
-      {/* Sticker decorations */}
-      <div
-        className="badge badge--school"
-        style={{
-          position: "absolute",
-          top: 40,
-          right: "12%",
-          transform: "rotate(12deg)",
-          padding: "8px 12px",
-        }}
-      >
-        <svg width="40" height="56" viewBox="0 0 40 56" fill="none">
-          <path
-            d="M20 0L26 18L40 20L28 32L32 52L20 42L8 52L12 32L0 20L14 18L20 0Z"
-            fill="var(--category-school)"
-            stroke="var(--on-surface)"
-            strokeWidth="2"
-          />
-        </svg>
-      </div>
-      <div
-        className="badge badge--professional"
-        style={{
-          position: "absolute",
-          bottom: 40,
-          left: "8%",
-          transform: "rotate(-8deg)",
-          padding: "8px 12px",
-        }}
-      >
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-          <circle
-            cx="22"
-            cy="22"
-            r="20"
-            fill="var(--category-professional)"
-            stroke="var(--on-surface)"
-            strokeWidth="2"
-          />
-          <circle cx="14" cy="18" r="3" fill="var(--on-surface)" />
-          <circle cx="30" cy="18" r="3" fill="var(--on-surface)" />
-          <path
-            d="M14 30C17 34 27 34 30 30"
-            stroke="var(--on-surface)"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
-        </svg>
-      </div>
-
       <div
         className="container"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          gap: 64,
+          gap: "var(--spacing-margin-lg)",
           alignItems: "center",
         }}
       >
-        {/* Left Column */}
+        {/* Left Content */}
         <div>
-          <h1
+          <motion.span
+            custom={0}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="badge badge--tertiary"
+            style={{ marginBottom: 24, display: "inline-block" }}
+          >
+            Enterprise Solutions
+          </motion.span>
+
+          <motion.h1
+            custom={1}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
             className="text-display-lg"
-            style={{ margin: 0, marginBottom: 16 }}
+            style={{ marginBottom: 16 }}
           >
-            learn smarter,
-            <br />
-            together
-          </h1>
+            Complete Digital <br />
+            <span style={{ color: "var(--primary)" }}>Campus.</span>
+          </motion.h1>
 
-          <p
-            className="text-body-lg text-primary"
-            style={{ marginBottom: 24 }}
+          <motion.h2
+            custom={2}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="text-headline-md"
+            style={{ marginBottom: 16, color: "var(--on-surface-variant)" }}
           >
-            built for universities, coaching institutes &amp; enterprises
-          </p>
+            One Platform for Modern Education.
+          </motion.h2>
 
-          <p
+          <motion.p
+            custom={3}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
             className="text-body-lg"
             style={{
-              maxWidth: 460,
+              maxWidth: 480,
               marginBottom: 32,
               color: "var(--on-surface-variant)",
             }}
           >
-            a complete learning management system with live classes, uploaded
-            content, assessments, and progress tracking — all in one place.{" "}
-            <span style={{ color: "var(--primary)", fontWeight: 500 }}>
-              no more juggling tools.
-            </span>
-          </p>
+            Whether you manage a school, college, university, or coaching
+            institute, our platform transforms every academic operation into a
+            seamless digital experience.
+          </motion.p>
 
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 16,
-              marginBottom: 16,
-            }}
+          <motion.div
+            custom={4}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="flex flex--wrap"
+            style={{ gap: 16 }}
           >
-            <button
-              className="btn btn--primary"
-              onClick={() => scrollTo?.("contact")}
-            >
-              start your journey →
+            <button className="btn btn--primary" style={{ padding: "14px 32px" }}>
+              Book a Demo
+              <ArrowRight size={18} />
             </button>
             <button
               className="btn btn--secondary"
-              onClick={() => scrollTo?.("features")}
+              style={{ padding: "14px 32px" }}
             >
-              explore features
+              Explore Platform
             </button>
-          </div>
-
-          <p className="text-body-sm text-muted">
-            free consultation · setup in 48 hours · no credit card needed
-          </p>
+          </motion.div>
         </div>
 
-        {/* Right Column — Product Notebook Visual */}
+        {/* Right — Floating UI Cards */}
         <div
-          className="card"
-          style={{
-            transform: "rotate(3deg)",
-            padding: 0,
-            overflow: "hidden",
-            maxWidth: 460,
-            justifySelf: "end",
-          }}
+          className="hide-mobile"
+          style={{ position: "relative", height: 500 }}
         >
-          {/* Notebook cover */}
-          <div
+          {/* Teacher Dashboard Card */}
+          <motion.div
+            custom={0}
+            variants={floatAnim}
+            initial="hidden"
+            animate="visible"
+            className="card"
             style={{
-              background:
-                "linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #8B4513 100%)",
-              padding: 40,
-              position: "relative",
+              position: "absolute",
+              top: 20,
+              right: 0,
+              width: 320,
+              padding: 24,
+              background: "rgba(255,255,255,0.85)",
+              backdropFilter: "blur(12px)",
             }}
           >
-            {/* Name Label Sticker */}
             <div
-              style={{
-                background: "var(--surface-container-lowest)",
-                padding: 20,
-                maxWidth: 240,
-                border: "1px solid var(--on-surface)",
-                borderRadius: "var(--radius-md)",
-                margin: "0 auto",
-                transform: "rotate(-2deg)",
-              }}
+              className="flex"
+              style={{ alignItems: "center", gap: 12, marginBottom: 16 }}
             >
               <div
-                className="text-headline-sm"
-                style={{ color: "var(--on-surface)", marginBottom: 4 }}
-              >
-                name: sarah
-              </div>
-              <div
-                className="text-body-sm"
-                style={{ color: "var(--on-surface-variant)", marginBottom: 2 }}
-              >
-                class: b.sc. computer science
-              </div>
-              <div
-                className="text-body-sm"
-                style={{ color: "var(--on-surface-variant)" }}
-              >
-                roll no: 2024/CS/045
-              </div>
-            </div>
-          </div>
-
-          {/* Notebook content preview */}
-          <div style={{ padding: 24 }}>
-            {[
-              { dot: "var(--primary)", text: "8 courses enrolled" },
-              { dot: "var(--category-diploma)", text: "next live class in 30 min" },
-              { dot: "var(--category-school)", text: "87% overall progress" },
-            ].map((item) => (
-              <div
-                key={item.text}
                 style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: "var(--radius-full)",
+                  background: "var(--primary-fixed)",
                   display: "flex",
                   alignItems: "center",
-                  gap: 12,
-                  marginBottom: 16,
+                  justifyContent: "center",
                 }}
               >
-                <div
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: "var(--radius-full)",
-                    background: item.dot,
-                    flexShrink: 0,
-                  }}
-                />
-                <span className="text-body-sm">{item.text}</span>
+                <GraduationCap size={20} style={{ color: "var(--primary)" }} />
               </div>
-            ))}
-          </div>
+              <div>
+                <p className="text-label-md">Teacher Dashboard</p>
+                <p className="text-body-sm text-muted">4 Active Classes Today</p>
+              </div>
+            </div>
+            <div style={{ marginBottom: 8 }}>
+              <div className="progress" style={{ marginBottom: 8 }}>
+                <div className="progress__fill" style={{ width: "75%" }} />
+              </div>
+              <p className="text-body-sm text-muted" style={{ textAlign: "right" }}>
+                75% Syllabus Covered
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Student Schedule Card */}
+          <motion.div
+            custom={1}
+            variants={floatAnim}
+            initial="hidden"
+            animate="visible"
+            className="card"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: 0,
+              transform: "translateY(-50%)",
+              width: 288,
+              padding: 24,
+              background: "rgba(255,255,255,0.85)",
+              backdropFilter: "blur(12px)",
+            }}
+          >
+            <p className="text-label-md" style={{ marginBottom: 12 }}>
+              Today&apos;s Schedule
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <div
+                className="flex"
+                style={{
+                  alignItems: "center",
+                  gap: 12,
+                  borderLeft: "4px solid var(--tertiary)",
+                  paddingLeft: 12,
+                }}
+              >
+                <div>
+                  <p className="text-label-sm">Applied Physics</p>
+                  <p className="text-body-sm text-muted">10:00 AM · Room 402</p>
+                </div>
+              </div>
+              <div
+                className="flex"
+                style={{
+                  alignItems: "center",
+                  gap: 12,
+                  borderLeft: "4px solid var(--primary)",
+                  paddingLeft: 12,
+                }}
+              >
+                <div>
+                  <p className="text-label-sm">Digital Arts</p>
+                  <p className="text-body-sm text-muted">01:30 PM · Online</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Attendance Card */}
+          <motion.div
+            custom={2}
+            variants={floatAnim}
+            initial="hidden"
+            animate="visible"
+            className="card"
+            style={{
+              position: "absolute",
+              bottom: 20,
+              right: 40,
+              width: 256,
+              padding: 24,
+              background: "rgba(255,255,255,0.85)",
+              backdropFilter: "blur(12px)",
+            }}
+          >
+            <div
+              className="flex flex--between"
+              style={{ marginBottom: 16 }}
+            >
+              <BarChart3 size={20} style={{ color: "var(--tertiary)" }} />
+              <span
+                className="badge badge--tertiary"
+                style={{ fontSize: 10, padding: "2px 8px" }}
+              >
+                LIVE
+              </span>
+            </div>
+            <p className="text-label-sm" style={{ color: "var(--on-surface-variant)", marginBottom: 4 }}>
+              Daily Attendance
+            </p>
+            <p
+              className="text-display-lg"
+              style={{ fontSize: 28 }}
+            >
+              94.2%
+            </p>
+          </motion.div>
         </div>
       </div>
     </section>
